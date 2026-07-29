@@ -9,7 +9,7 @@ Zero frameworks. Pure HTML5, CSS3, and JavaScript ES6+.
 
 ## Live Demo
 
-> Deploy link goes here after Vercel deployment
+> https://povc.vercel.app
 
 ---
 
