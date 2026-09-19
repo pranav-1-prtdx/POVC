@@ -75,25 +75,58 @@ function initGSAP() {
    3. MAIN BOOT
 ============================================================ */
 function bootAll() {
+  initThemeToggle();
   initCursor();
   initNav();
   initScrollProgress();
-  initUptime();
-  initNodeScrambler();
-  initParticles();
   heroEntrance();
-  initTyping();
   initSectorAnimations();
-  initSkillBars();
-  initTelemBars();
-  initProgressBar();
   initPhaseBar();
-  initLifeLevels();
   initStatCounters();
   initContactTerminal();
-  initGridFlicker();
   initKeyboardA11y();
+  initActiveNav();
   consoleGreeting();
+}
+
+/* ============================================================
+   THEME TOGGLE (light default, dark opt-in, persisted)
+   The saved theme is already applied by the inline script in
+   <head> before first paint — this only wires up the button.
+============================================================ */
+function initThemeToggle() {
+  const btn  = document.getElementById('themeToggle');
+  const meta = document.getElementById('themeColorMeta');
+  const root = document.documentElement;
+  const KEY  = 'povc-theme';
+
+  const isDark = () => root.getAttribute('data-theme') === 'dark';
+
+  const sync = () => {
+    const dark = isDark();
+    if (btn) {
+      btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      btn.setAttribute('aria-pressed', String(dark));
+    }
+    if (meta) meta.setAttribute('content', dark ? '#0a0a0a' : '#fbfbfc');
+  };
+
+  sync();
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const goingDark = !isDark();
+    if (goingDark) {
+      root.setAttribute('data-theme', 'dark');
+    } else {
+      root.removeAttribute('data-theme');
+    }
+    try {
+      localStorage.setItem(KEY, goingDark ? 'dark' : 'light');
+    } catch (e) { /* storage blocked — choice just won't persist */ }
+    sync();
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  });
 }
 
 /* ============================================================
@@ -125,7 +158,7 @@ function initCursor() {
   document.addEventListener('mouseenter', () => { dot.style.opacity='1'; ring.style.opacity='1'; });
 
   // Expand ring on hoverable elements
-  const hoverEls = document.querySelectorAll('a,button,.project-card,.contact-card,.achievement-card,.phase-card,.level-card,.skill-category');
+  const hoverEls = document.querySelectorAll('a,button,.project-card,.contact-card,.achievement-card,.phase-card,.build-card');
   hoverEls.forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
     el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
@@ -181,140 +214,20 @@ function initScrollProgress() {
 }
 
 /* ============================================================
-   7. UPTIME COUNTER
-============================================================ */
-function initUptime() {
-  const el = document.getElementById('uptimeCounter');
-  if (!el) return;
-  let s = 0;
-  const pad = n => String(n).padStart(2,'0');
-  setInterval(() => {
-    s++;
-    el.textContent = `${pad(Math.floor(s/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`;
-  }, 1000);
-}
-
-/* ============================================================
-   8. NODE ID SCRAMBLER
-============================================================ */
-function initNodeScrambler() {
-  const el = document.getElementById('nodeId');
-  if (!el) return;
-  const chars = '0123456789ABCDEF';
-  setInterval(() => {
-    if (Math.random() < 0.15) {
-      el.textContent = 'VCR-' + Array.from({length:4}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
-      setTimeout(() => { el.textContent = 'VCR-7734'; }, 120);
-    }
-  }, 3000);
-}
-
-/* ============================================================
-   9. PARTICLE CANVAS
-============================================================ */
-function initParticles() {
-  const canvas = document.getElementById('heroParticles');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, particles;
-
-  const resize = () => {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  };
-  resize();
-  window.addEventListener('resize', resize, { passive:true });
-
-  const N = 55;
-  particles = Array.from({length:N}, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35,
-    r: Math.random() * 1.5 + 0.5,
-    a: Math.random() * 0.5 + 0.1
-  }));
-
-  const draw = () => {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,204,255,${p.a})`;
-      ctx.fill();
-    });
-    // Draw connection lines
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,255,159,${(1 - dist/120) * 0.12})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  };
-  draw();
-}
-
-/* ============================================================
    10. HERO ENTRANCE (GSAP)
 ============================================================ */
 function heroEntrance() {
-  gsap.set(['#heroStatusBar','.hero-pre-label','#heroName','.hero-real-name','#heroSubtitle','#heroTerminal','#heroCta','.hero-hud-stats','.hero-scroll-indicator'], { opacity:0, y:20 });
+  gsap.set(['#heroStatusBar','.hero-kicker','#heroName','#heroRealName','#heroSubtitle','#heroTerminal','#heroCta','.hero-scroll-indicator'], { opacity:0, y:20 });
 
   const tl = gsap.timeline({ defaults:{ ease:'power3.out' }, delay:0.1 });
-  tl.to('#heroStatusBar',      { opacity:1, y:0, duration:0.7 })
-    .to('.hero-pre-label',     { opacity:1, y:0, duration:0.5 }, '-=0.4')
+  tl.to('.hero-kicker',        { opacity:1, y:0, duration:0.6 })
     .to('#heroName',           { opacity:1, y:0, duration:0.9, ease:'expo.out' }, '-=0.3')
-    .to('.hero-real-name',     { opacity:1, y:0, duration:0.5 }, '-=0.5')
-    .to('#heroSubtitle',       { opacity:1, y:0, duration:0.5 }, '-=0.4')
-    .to('#heroTerminal',       { opacity:1, y:0, duration:0.5 }, '-=0.3')
+    .to('#heroRealName',       { opacity:1, y:0, duration:0.5 }, '-=0.5')
+    .to('#heroSubtitle',       { opacity:1, y:0, duration:0.6 }, '-=0.4')
+    .to('#heroTerminal',       { opacity:1, y:0, duration:0.6 }, '-=0.4')
     .to('#heroCta',            { opacity:1, y:0, duration:0.5 }, '-=0.3')
-    .to(['.hero-hud-stats','.hero-scroll-indicator'], { opacity:1, y:0, duration:0.6, stagger:0.15 }, '-=0.2');
-}
-
-/* ============================================================
-   11. TYPING ANIMATION
-============================================================ */
-function initTyping() {
-  const el = document.getElementById('terminalText');
-  if (!el) return;
-
-  const phrases = [
-    'AI Builder & Developer',
-    'Vishnu AI Creator',
-    'Frontend Engineer',
-    'Systems Optimizer',
-    'Motorsport Competitor',
-    'Future MIT Engineer'
-  ];
-
-  let pi = 0, ci = 0, deleting = false, delay = 100;
-
-  const type = () => {
-    const phrase = phrases[pi];
-    el.textContent = deleting
-      ? phrase.substring(0, --ci)
-      : phrase.substring(0, ++ci);
-
-    delay = deleting ? 52 : 105;
-
-    if (!deleting && ci === phrase.length) { delay = 2000; deleting = true; }
-    if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 450; }
-    setTimeout(type, delay);
-  };
-  setTimeout(type, 1800);
+    .to('#heroStatusBar',      { opacity:1, y:0, duration:0.5 }, '-=0.2')
+    .to('.hero-scroll-indicator', { opacity:1, y:0, duration:0.6 }, '-=0.2');
 }
 
 /* ============================================================
@@ -404,22 +317,6 @@ function initSectorAnimations() {
     }
   );
 
-  // Telemetry board
-  gsap.fromTo('.telemetry-board',
-    { opacity:0, y:28 },
-    { opacity:1, y:0, duration:0.9, ease:'power3.out',
-      scrollTrigger:{ trigger:'#sector-02', start:'top 70%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Sector time cards
-  gsap.fromTo('.sector-time-card',
-    { opacity:0, scale:0.94 },
-    { opacity:1, scale:1, duration:0.5, stagger:0.1, ease:'back.out(1.4)',
-      scrollTrigger:{ trigger:'.board-sectors', start:'top 82%', toggleActions:'play none none none' }
-    }
-  );
-
   // Timeline track
   gsap.fromTo('.timeline-track',
     { scaleY:0, transformOrigin:'top center' },
@@ -437,29 +334,6 @@ function initSectorAnimations() {
       }
     );
   });
-
-  // Life XP header
-  gsap.fromTo('.life-xp-header',
-    { opacity:0, y:16 },
-    { opacity:1, y:0, duration:0.7, ease:'power3.out',
-      scrollTrigger:{ trigger:'.life-xp-header', start:'top 85%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Level cards
-  gsap.fromTo('.level-card',
-    { opacity:0, y:22, scale:0.97 },
-    { opacity:1, y:0, scale:1, duration:0.5, stagger:{ amount:0.9 }, ease:'power2.out',
-      scrollTrigger:{ trigger:'.level-grid', start:'top 80%', toggleActions:'play none none none',
-        onComplete: () => {
-          // Restore locked card opacity after animation
-          setTimeout(() => {
-            document.querySelectorAll('.lc-locked').forEach(c => { c.style.opacity = '0.42'; });
-          }, 950);
-        }
-      }
-    }
-  );
 
   // Achievement cards
   gsap.fromTo('.achievement-card',
@@ -497,81 +371,6 @@ function initSectorAnimations() {
 /* ============================================================
    13. SKILL BARS
 ============================================================ */
-function initSkillBars() {
-  ScrollTrigger.create({
-    trigger: '.skills-grid',
-    start: 'top 75%',
-    onEnter: () => {
-      document.querySelectorAll('.sb-fill[data-target]').forEach((bar, i) => {
-        setTimeout(() => { bar.style.width = bar.getAttribute('data-target') + '%'; }, i * 80);
-      });
-    }
-  });
-}
-
-/* ============================================================
-   14. TELEMETRY BARS + LAPTIME COUNTER
-============================================================ */
-function initTelemBars() {
-  ScrollTrigger.create({
-    trigger: '.board-telemetry-bars',
-    start: 'top 80%',
-    onEnter: () => {
-      document.querySelectorAll('.telem-bar-fill[data-value]').forEach(bar => {
-        bar.style.width = bar.getAttribute('data-value') + '%';
-      });
-    }
-  });
-
-  // Laptime count-up
-  ScrollTrigger.create({
-    trigger: '.telemetry-board',
-    start: 'top 70%',
-    onEnter: () => {
-      const el = document.getElementById('laptimeDisplay');
-      if (!el) return;
-      const target = (6 * 60 + 38) * 1000 + 330;
-      const dur = 1400, start = performance.now();
-      const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-      const pad2 = n => String(n).padStart(2,'0');
-      const tick = now => {
-        const p = Math.min((now - start) / dur, 1);
-        const cur = Math.floor(easeOutExpo(p) * target);
-        el.innerHTML = `${Math.floor(cur/60000)}:${pad2(Math.floor((cur%60000)/1000))}.${pad2(Math.floor((cur%1000)/10))}<span class="laptime-delta">▲ PB</span>`;
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }
-  });
-}
-
-/* ============================================================
-   15. SPRINT PROGRESS BAR
-============================================================ */
-function initProgressBar() {
-  ScrollTrigger.create({
-    trigger: '.milestone-active',
-    start: 'top 80%',
-    onEnter: () => {
-      const fill = document.getElementById('progressFill');
-      const pct  = document.getElementById('progressPct');
-      if (!fill) return;
-      const target = parseInt(fill.getAttribute('data-target') || '67');
-      const dur = 1600, start = performance.now();
-      const ease = t => 1 - Math.pow(1 - t, 3);
-      const tick = now => {
-        const p = Math.min((now - start) / dur, 1);
-        const v = Math.floor(ease(p) * target);
-        fill.style.width = v + '%';
-        fill.setAttribute('aria-valuenow', v);
-        if (pct) pct.textContent = v + '%';
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }
-  });
-}
-
 /* ============================================================
    16. VISHNU AI V.FORCE BAR
 ============================================================ */
@@ -582,31 +381,6 @@ function initPhaseBar() {
     onEnter: () => {
       const fill = document.getElementById('vforceFill');
       if (fill) { setTimeout(() => { fill.style.width = (fill.getAttribute('data-target') || '94') + '%'; }, 300); }
-    }
-  });
-}
-
-/* ============================================================
-   17. LIFE LEVEL BARS + OVERALL XP
-============================================================ */
-function initLifeLevels() {
-  ScrollTrigger.create({
-    trigger: '.life-xp-header',
-    start: 'top 80%',
-    onEnter: () => {
-      const xp = document.getElementById('lifeXpFill');
-      if (xp) xp.style.width = (xp.getAttribute('data-target') || '40') + '%';
-    }
-  });
-
-  ScrollTrigger.create({
-    trigger: '.level-grid',
-    start: 'top 75%',
-    onEnter: () => {
-      document.querySelectorAll('.lc-bar-fill[data-target]').forEach((bar, i) => {
-        const t = parseInt(bar.getAttribute('data-target') || '0');
-        if (t > 0) setTimeout(() => { bar.style.width = t + '%'; }, i * 85);
-      });
     }
   });
 }
@@ -654,20 +428,6 @@ function initContactTerminal() {
 }
 
 /* ============================================================
-   20. GRID FLICKER
-============================================================ */
-function initGridFlicker() {
-  const el = document.querySelector('.hero-grid-bg');
-  if (!el) return;
-  setInterval(() => {
-    if (Math.random() < 0.03) {
-      el.style.opacity = '0.5';
-      setTimeout(() => { el.style.opacity = '1'; }, 80);
-    }
-  }, 200);
-}
-
-/* ============================================================
    21. KEYBOARD ACCESSIBILITY
 ============================================================ */
 function initKeyboardA11y() {
@@ -689,9 +449,9 @@ function consoleGreeting() {
   const s1 = 'color:#00ff9f;font-size:15px;font-family:monospace;font-weight:900';
   const s2 = 'color:#00ccff;font-size:11px;font-family:monospace';
   const s3 = 'color:rgba(0,204,255,0.45);font-size:10px;font-family:monospace';
-  console.log('%c[POVC_OS v3.0] Boot complete. Welcome to Pranav\'s cockpit.', s1);
-  console.log('%cAKA: VISHNU | Node: VCR-7734 | Build: v3.0.0-FINAL', s2);
-  console.log('%cBuilt with Claude AI | linkedin.com/in/pranavbhatia', s3);
+  console.log('%cPOVC 2.0 — Portfolio of Pranav Bhatia', s1);
+  console.log('%cBuilt from scratch — HTML, CSS, JS, GSAP. No frameworks.', s2);
+  console.log('%clinkedin.com/in/pranavkbhatia · github.com/pranav-1-prtdx', s3);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -707,16 +467,14 @@ function initActiveNav() {
   const navLinks = document.querySelectorAll('.nav-link');
   if (!sections.length || !navLinks.length) return;
 
+  // Maps section id -> nav label. Sections not listed here (skills,
+  // achievements) intentionally don't own a top-level nav item.
   const sectionMap = {
-    'hero':         'HOME',
-    'about':        'ABOUT',
-    'skills':       'SKILLS',
-    'sector-01':    'PROJECTS',
-    'sector-04':    'VISHNU_AI',
-    'sector-02':    'TELEMETRY',
-    'sector-05':    'LIFE_LOG',
-    'achievements': 'AWARDS',
-    'contact':      'CONTACT'
+    'home':      'HOME',
+    'sector-01': 'PROJECTS',
+    'about':     'ABOUT',
+    'sector-03': 'JOURNEY',
+    'contact':   'CONTACT'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -737,7 +495,7 @@ function initActiveNav() {
   });
 
   sections.forEach(section => {
-    if (sectionMap[section.id] !== undefined || section.id === 'hero') {
+    if (sectionMap[section.id] !== undefined) {
       observer.observe(section);
     }
   });
@@ -750,21 +508,3 @@ function initActiveNav() {
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
-
-/**
- * Conditionally run particles — skip on reduced motion or low-power devices
- */
-function initParticlesSafe() {
-  if (prefersReducedMotion()) return;
-  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return;
-  initParticles(); // already defined in main app.js
-}
-
-// Attach active nav to boot sequence
-const _originalBootAll = bootAll;
-
-// Re-run active nav after all animations settle
-setTimeout(initActiveNav, 2500);
-
-// Also init on every scroll refresh
-window.addEventListener('scroll', () => {}, { passive: true }); // keep passive listener registered

@@ -9,7 +9,7 @@
   <meta name="description" content="Pranav Bhatia — 15-year-old AI builder, frontend engineer, and motorsport competitor from India. Creator of Vishnu AI V.Force. This is POVC." />
   <meta name="keywords" content="Pranav Bhatia, POVC, Vishnu AI, Portfolio, Frontend Engineer, AI Developer, India" />
   <meta name="author" content="Pranav Bhatia" />
-  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="theme-color" content="#fbfbfc" id="themeColorMeta" />
   <link rel="canonical" href="https://povc.vercel.app/" />
 
   <!-- ── Open Graph ── -->
@@ -34,11 +34,23 @@
   <!-- ── Fonts (display=swap for performance) ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- ── GSAP ── -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <script>
+    // Applied before first paint so there is no theme flash on load.
+    // Light is the default; dark is only used if the visitor chose it before.
+    (function () {
+      try {
+        if (localStorage.getItem('povc-theme') === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) { /* storage blocked — fall back to light */ }
+    })();
+  </script>
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -79,100 +91,76 @@
   </div>
 
   <!-- Scanline overlay -->
-  <div class="scanline-overlay" aria-hidden="true"></div>
 
   <!-- Scroll progress bar -->
   <div class="scroll-progress-bar" id="scrollProgressBar" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 
   <!-- ── NAVIGATION ─────────────────────────────────────────────── -->
   <nav class="nav-bar" id="navbar" aria-label="Main navigation">
-    <a href="#hero" class="nav-logo" aria-label="POVC — Home">
+    <a href="#home" class="nav-logo" aria-label="POVC — Home">
       <span class="nav-logo-bracket">[</span>POVC<span class="nav-logo-bracket">]</span>
     </a>
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#hero"         class="nav-link" aria-label="Home">HOME</a></li>
-      <li><a href="#about"        class="nav-link" aria-label="About Pranav">ABOUT</a></li>
-      <li><a href="#skills"       class="nav-link" aria-label="Skills">SKILLS</a></li>
-      <li><a href="#sector-01"    class="nav-link" aria-label="Projects">PROJECTS</a></li>
-      <li><a href="#sector-04"    class="nav-link" aria-label="Vishnu AI Dev Log">VISHNU_AI</a></li>
-      <li><a href="#sector-02"    class="nav-link" aria-label="Racing Telemetry">TELEMETRY</a></li>
-      <li><a href="#sector-05"    class="nav-link" aria-label="Life Journey">LIFE_LOG</a></li>
-      <li><a href="#achievements" class="nav-link" aria-label="Achievements">AWARDS</a></li>
-      <li><a href="#contact"      class="nav-link" aria-label="Contact">CONTACT</a></li>
+      <li><a href="#home"      class="nav-link" aria-label="Home">HOME</a></li>
+      <li><a href="#sector-01" class="nav-link" aria-label="Projects">PROJECTS</a></li>
+      <li><a href="#about"     class="nav-link" aria-label="About Pranav">ABOUT</a></li>
+      <li><a href="#sector-03" class="nav-link" aria-label="Journey">JOURNEY</a></li>
+      <li><a href="#contact"   class="nav-link" aria-label="Contact">CONTACT</a></li>
     </ul>
-    <div class="nav-status" aria-label="System status: online">
-      <span class="status-dot pulse" aria-hidden="true"></span>
-      <span>SYS_ONLINE</span>
+    <div class="nav-actions">
+      <div class="nav-status" aria-label="Status: available">
+        <span class="status-dot pulse" aria-hidden="true"></span>
+        <span>Available</span>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+      </button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
-    </button>
   </nav>
 
   <!-- ── HERO ──────────────────────────────────────────────────── -->
-  <section class="hero-section" id="hero" aria-label="Introduction">
+  <section class="hero-section" id="home" aria-label="Introduction">
     <div class="hero-grid-bg" aria-hidden="true"></div>
-    <canvas class="hero-particles" id="heroParticles" aria-hidden="true"></canvas>
     <div class="corner-deco corner-tl" aria-hidden="true"></div>
     <div class="corner-deco corner-tr" aria-hidden="true"></div>
     <div class="corner-deco corner-bl" aria-hidden="true"></div>
     <div class="corner-deco corner-br" aria-hidden="true"></div>
 
-    <div class="hero-status-bar" id="heroStatusBar" aria-hidden="true">
-      <div class="status-item">
-        <span class="status-dot pulse"></span>
-        <span>SYSTEM ONLINE</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label-dim">BUILD:</span>
-        <span class="status-value">v3.0.0-FINAL</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label-dim">NODE:</span>
-        <span class="status-value" id="nodeId">VCR-7734</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label-dim">UPTIME:</span>
-        <span class="status-value" id="uptimeCounter">00:00:00</span>
-      </div>
-    </div>
-
     <div class="hero-content">
-      <div class="hero-pre-label" id="heroPre" aria-hidden="true">PORTFOLIO_OS / INIT_SEQUENCE_COMPLETE</div>
-      <h1 class="hero-name" id="heroName" data-glitch="VISHNU">VISHNU</h1>
-      <p class="hero-real-name" id="heroRealName">Pranav Bhatia</p>
-      <p class="hero-subtitle" id="heroSubtitle">Portfolio Of Vishnu Creator</p>
-
-      <div class="hero-terminal" id="heroTerminal" aria-live="polite" aria-label="Typing animation">
-        <span class="terminal-prompt" aria-hidden="true">&gt;&nbsp;</span>
-        <span class="terminal-text" id="terminalText"></span>
-        <span class="terminal-cursor" aria-hidden="true">▋</span>
-      </div>
+      <div class="hero-kicker" id="heroPre">STUDENT · DEVELOPER · BUILDER</div>
+      <h1 class="hero-name" id="heroName">Pranav Bhatia</h1>
+      <p class="hero-alias" id="heroRealName">also known as <strong>VISHNU</strong> — this is POVC</p>
+      <p class="hero-tagline" id="heroSubtitle">Turning ideas into real products.</p>
+      <p class="hero-sub" id="heroTerminal">I'm a Class 10 student in India who builds AI-powered software — from a self-taught idea to an interview automation platform now being built for a real company. This portfolio is one of those things too.</p>
 
       <div class="hero-cta" id="heroCta">
         <a href="#sector-01" class="btn btn-primary">
-          <span aria-hidden="true">◈</span>
-          ENTER COCKPIT
+          View Projects
           <span class="btn-glow" aria-hidden="true"></span>
         </a>
-        <a href="#contact" class="btn btn-secondary">
-          <span aria-hidden="true">⌥</span>
-          CONTACT ME
+        <a href="#about" class="btn btn-secondary">
+          About Me
         </a>
+      </div>
+
+      <div class="hero-status" id="heroStatusBar">
+        <span class="status-dot pulse" aria-hidden="true"></span>
+        <span>Currently building <strong>Vishnu AI Force</strong></span>
       </div>
     </div>
 
     <div class="hero-scroll-indicator" aria-hidden="true">
       <span class="scroll-label">SCROLL_DOWN</span>
       <div class="scroll-line"></div>
-    </div>
-
-    <div class="hero-hud-stats" aria-hidden="true">
-      <div class="hud-stat"><span class="hud-val">07</span><span class="hud-key">SECTORS</span></div>
-      <div class="hud-divider"></div>
-      <div class="hud-stat"><span class="hud-val">04</span><span class="hud-key">PROJECTS</span></div>
-      <div class="hud-divider"></div>
-      <div class="hud-stat"><span class="hud-val">∞</span><span class="hud-key">POTENTIAL</span></div>
     </div>
   </section>
 
@@ -181,90 +169,90 @@
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">SECTOR_00</span>
+          <span class="sector-num">01 &mdash; ABOUT</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="about-heading">ABOUT THE CREATOR</h2>
+        <h2 class="sector-title" id="about-heading">About me</h2>
         <p class="sector-desc">Who I am, where I came from, and where I'm going.</p>
       </header>
 
       <div class="about-grid">
-        <div class="about-identity-card" role="complementary" aria-label="Identity card">
+        <div class="about-identity-card" role="complementary" aria-label="Profile card">
           <div class="aic-top">
             <div class="aic-avatar">
               <img src="assets/profile.jpg" alt="Pranav Bhatia" width="480" height="480" loading="lazy" decoding="async" />
             </div>
             <div class="aic-info">
-              <div class="aic-name">PRANAV BHATIA</div>
-              <div class="aic-alias">a.k.a VISHNU</div>
-              <div class="aic-role">AI Builder &amp; Frontend Engineer</div>
+              <div class="aic-name">Pranav Bhatia</div>
+              <div class="aic-alias">VISHNU</div>
+              <div class="aic-role">Student &amp; Developer</div>
             </div>
           </div>
           <dl class="aic-stats">
             <div class="aic-stat-row">
               <dt class="aic-key">STATUS</dt>
-              <dd class="aic-val aic-val-green">Class 10th Student ⚡</dd>
+              <dd class="aic-val aic-val-green">Class 10 student</dd>
             </div>
             <div class="aic-stat-row">
               <dt class="aic-key">LOCATION</dt>
               <dd class="aic-val">India</dd>
             </div>
             <div class="aic-stat-row">
-              <dt class="aic-key">FOCUS</dt>
-              <dd class="aic-val">AI · Web · Motorsport</dd>
-            </div>
-            <div class="aic-stat-row">
               <dt class="aic-key">SCHOOL</dt>
               <dd class="aic-val">BBPS</dd>
             </div>
             <div class="aic-stat-row">
-              <dt class="aic-key">GOAL</dt>
-              <dd class="aic-val">IIM INDORE &amp; Beyond</dd>
+              <dt class="aic-key">FOCUS</dt>
+              <dd class="aic-val">AI &middot; Web &middot; Automation</dd>
+            </div>
+            <div class="aic-stat-row">
+              <dt class="aic-key">LEARNING</dt>
+              <dd class="aic-val">Self-taught</dd>
             </div>
           </dl>
-          <div class="aic-badges" aria-label="Tags">
-            <span class="aic-badge">🤖 AI Builder</span>
-            <span class="aic-badge">🏎️ Motorsport</span>
-            <span class="aic-badge">💻 Self-taught</span>
-            <span class="aic-badge">🎯 SOF Olympian</span>
+          <div class="aic-badges" aria-label="Interests">
+            <span class="aic-badge">AI Systems</span>
+            <span class="aic-badge">Frontend</span>
+            <span class="aic-badge">Robotics</span>
+            <span class="aic-badge">Sim Racing</span>
           </div>
         </div>
 
         <div class="about-bio">
           <div class="about-bio-text">
-            <p>I'm <span class="about-highlight">Pranav Bhatia</span> — a 15-year-old developer, AI builder, and motorsport enthusiast from India. I go by <span class="about-highlight">VISHNU</span> when I'm in the cockpit.</p>
-            <p>I don't do tutorials or clones. I build actual systems. <span class="about-highlight">Vishnu AI</span> is the proof — it started as a half-baked idea in a notepad and went through four complete rebuilds before becoming the Claude-powered V.Force it is today.</p>
-            <p>My stack changes based on what the project needs. Right now that's AI integration, web systems, automation, and motorsport telemetry. Zero formal training — everything I know came from building things, breaking them, and starting over.</p>
-            <p>The target? <span class="about-highlight">IIM INDORE. Then the real work begins.</span></p>
+            <p>I&rsquo;m <span class="about-highlight">Pranav Bhatia</span>, a Class 10 student in India. Most people online know me as <span class="about-highlight">VISHNU</span> &mdash; that&rsquo;s where the name POVC comes from.</p>
+            <p>I got into building because following tutorials got boring fast. Vishnu AI started as a rough idea I couldn&rsquo;t actually execute yet, and I rebuilt it four times before it did what I wanted. That loop &mdash; build it badly, understand why, start over &mdash; is basically how I&rsquo;ve learned everything.</p>
+            <p>Right now my work sits across AI systems, web development, and automation. I have no formal CS training, so I lean hard on documentation, trial and error, and shipping things that other people will actually use.</p>
+            <p>I&rsquo;m still a student, so I&rsquo;m not going to pretend I have years of industry experience. What I do have is a handful of real projects, one of them being built for an actual company, and the patience to keep rewriting something until it works.</p>
           </div>
 
           <div class="about-quick-facts" role="list">
             <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">⚡</span>
+              <span class="aqf-icon" aria-hidden="true">&#9889;</span>
               <div>
-                <div class="aqf-title">Self-Taught Developer</div>
-                <div class="aqf-desc">No CS classes, no bootcamps. Just curiosity, a laptop, and too many late nights.</div>
+                <div class="aqf-title">Self-taught</div>
+                <div class="aqf-desc">No CS classes, no bootcamps &mdash; documentation, forums, and a lot of broken builds.</div>
               </div>
             </div>
             <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">🤖</span>
+              <span class="aqf-icon" aria-hidden="true">&#129302;</span>
               <div>
-                <div class="aqf-title">Vishnu AI Creator</div>
-                <div class="aqf-desc">Took an AI system from a rough idea to a 4-phase architecture. Still building.</div>
+                <div class="aqf-title">Building Vishnu AI</div>
+                <div class="aqf-desc">An interview automation platform, currently in development for a real client.</div>
               </div>
             </div>
             <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">🏎️</span>
+              <span class="aqf-icon" aria-hidden="true">&#127891;</span>
               <div>
-                <div class="aqf-title">Motorsport Competitor</div>
-                <div class="aqf-desc">Personal best: 6:38.33 at the Nürburgring Nordschleife. NERC GT3 class.</div>
+                <div class="aqf-title">Competing academically</div>
+                <div class="aqf-desc">Five SOF Olympiad medals and a Scholar Badge along the way.</div>
               </div>
             </div>
             <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">🎯</span>
+              <span class="aqf-icon" aria-hidden="true">&#128101;</span>
               <div>
-                <div class="aqf-title">SOF Olympian</div>
-                <div class="aqf-desc">Competed and medalled through the Science Olympiad Foundation over multiple rounds.</div>
+                <div class="aqf-title">Discipline Prefect</div>
+                <div class="aqf-desc">Elected at BBPS &mdash; coordination and student welfare, not just a title.</div>
               </div>
             </div>
           </div>
@@ -273,97 +261,43 @@
     </div>
   </section>
 
-  <!-- ── SKILLS ─────────────────────────────────────────────────── -->
+  <!-- ── WHAT I BUILD ───────────────────────────────────────────── -->
   <section class="sector" id="skills" aria-labelledby="skills-heading">
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">SECTOR_01</span>
+          <span class="sector-num">02 &mdash; WHAT I BUILD</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="skills-heading">CAPABILITY MATRIX</h2>
-        <p class="sector-desc">What I actually know how to do — and how well.</p>
+        <h2 class="sector-title" id="skills-heading">Where I spend my time</h2>
+        <p class="sector-desc">Four areas I keep coming back to &mdash; each one has something real behind it.</p>
       </header>
 
-      <div class="skills-grid">
-        <div class="skill-category">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon" aria-hidden="true">🤖</span>
-            <span class="skill-cat-name">AI &amp; AUTOMATION</span>
-          </div>
-          <div class="skill-bars" role="list" aria-label="AI and Automation skills">
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">AI Prompting &amp; Engineering</span><span class="sb-val" aria-label="92 percent">92%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="92"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">Python</span><span class="sb-val" aria-label="75 percent">75%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="75"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">LLM Integration</span><span class="sb-val" aria-label="85 percent">85%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="85"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">Automation</span><span class="sb-val" aria-label="78 percent">78%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="78"></div></div>
-            </div>
-          </div>
+      <div class="build-grid" role="list">
+        <div class="build-card" role="listitem">
+          <span class="build-icon" aria-hidden="true">&#129302;</span>
+          <h3 class="build-title">AI Systems</h3>
+          <p class="build-desc">LLM integration, prompt design, and wiring models into workflows that run without a human watching. Vishnu AI is where most of this happens.</p>
         </div>
-
-        <div class="skill-category">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon" aria-hidden="true">💻</span>
-            <span class="skill-cat-name">FRONTEND</span>
-          </div>
-          <div class="skill-bars" role="list" aria-label="Frontend skills">
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">HTML5 &amp; CSS3</span><span class="sb-val" aria-label="88 percent">88%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="88"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">JavaScript ES6+</span><span class="sb-val" aria-label="80 percent">80%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="80"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">GSAP &amp; Animations</span><span class="sb-val" aria-label="85 percent">85%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="85"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">UI/UX Design</span><span class="sb-val" aria-label="70 percent">70%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="70"></div></div>
-            </div>
-          </div>
+        <div class="build-card" role="listitem">
+          <span class="build-icon" aria-hidden="true">&#128187;</span>
+          <h3 class="build-title">Web &amp; Frontend</h3>
+          <p class="build-desc">Interfaces built from scratch &mdash; HTML, CSS, JavaScript, and GSAP for motion. No frameworks unless the project genuinely needs one.</p>
         </div>
-
-        <div class="skill-category">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon" aria-hidden="true">🎯</span>
-            <span class="skill-cat-name">PRODUCT &amp; LEADERSHIP</span>
-          </div>
-          <div class="skill-bars" role="list" aria-label="Product and Leadership skills">
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">Product Thinking</span><span class="sb-val" aria-label="90 percent">90%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="90"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">Leadership</span><span class="sb-val" aria-label="88 percent">88%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="88"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">Problem Solving</span><span class="sb-val" aria-label="92 percent">92%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="92"></div></div>
-            </div>
-            <div class="skill-bar-item" role="listitem">
-              <div class="sb-top"><span class="sb-name">System Architecture</span><span class="sb-val" aria-label="80 percent">80%</span></div>
-              <div class="sb-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="sb-fill" data-target="80"></div></div>
-            </div>
-          </div>
+        <div class="build-card" role="listitem">
+          <span class="build-icon" aria-hidden="true">&#9881;&#65039;</span>
+          <h3 class="build-title">Automation</h3>
+          <p class="build-desc">Backend services and browser automation that remove repetitive work. Flask APIs, Playwright scripts, and scheduled jobs.</p>
+        </div>
+        <div class="build-card" role="listitem">
+          <span class="build-icon" aria-hidden="true">&#129691;</span>
+          <h3 class="build-title">Hardware &amp; Robotics</h3>
+          <p class="build-desc">Physical prototypes where software meets sensors. The Smart Elderly Robot came out of this &mdash; a walking build with fall detection.</p>
         </div>
       </div>
 
       <div class="tech-stack">
-        <div class="tech-stack-label">STACK &amp; TOOLS</div>
+        <div class="tech-stack-label">TOOLS I WORK WITH</div>
         <div class="tech-pills" role="list" aria-label="Technologies and tools">
           <span class="tech-pill" role="listitem">Python</span>
           <span class="tech-pill" role="listitem">JavaScript</span>
@@ -372,27 +306,45 @@
           <span class="tech-pill" role="listitem">GSAP</span>
           <span class="tech-pill" role="listitem">Flask</span>
           <span class="tech-pill" role="listitem">SQLite</span>
-          <span class="tech-pill" role="listitem">OpenAI API</span>
-          <span class="tech-pill" role="listitem">Claude API</span>
-          <span class="tech-pill" role="listitem">Grok API</span>
+          <span class="tech-pill" role="listitem">GPT-4o</span>
           <span class="tech-pill" role="listitem">ElevenLabs</span>
           <span class="tech-pill" role="listitem">Playwright</span>
           <span class="tech-pill" role="listitem">Git</span>
           <span class="tech-pill" role="listitem">Vercel</span>
         </div>
       </div>
+
+      <div class="now-block" aria-labelledby="now-heading">
+        <div class="now-header">
+          <span class="status-dot pulse" aria-hidden="true"></span>
+          <h3 class="now-title" id="now-heading">Currently building</h3>
+        </div>
+        <div class="now-list" role="list">
+          <div class="now-item" role="listitem">
+            <div class="now-item-name">Vishnu AI Force</div>
+            <div class="now-item-desc">AI interview automation platform &mdash; in development for MKIPL.</div>
+          </div>
+          <div class="now-item" role="listitem">
+            <div class="now-item-name">POVC 2.0</div>
+            <div class="now-item-desc">This portfolio &mdash; rebuilt as a proper professional site.</div>
+          </div>
+          <div class="now-item" role="listitem">
+            <div class="now-item-name">Class 10 boards</div>
+            <div class="now-item-desc">The other full-time project this year.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-
   <!-- ── PROJECTS ───────────────────────────────────────────────── -->
   <section class="sector" id="sector-01" aria-labelledby="projects-heading">
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">SECTOR_02</span>
+          <span class="sector-num">03 &mdash; PROJECTS</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="projects-heading">DEVELOPMENT GRID</h2>
+        <h2 class="sector-title" id="projects-heading">Things I&rsquo;ve built</h2>
         <p class="sector-desc">Things I've actually shipped. Each card is a real project, not a mock-up.</p>
       </header>
 
@@ -565,20 +517,13 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ── VISHNU AI DEV LOG ──────────────────────────────────────── -->
-  <section class="sector" id="sector-04" aria-labelledby="vishnuai-heading">
-    <div class="sector-container">
-      <header class="sector-header">
-        <div class="sector-tag">
-          <span class="sector-num">SECTOR_03</span>
-          <div class="sector-line" aria-hidden="true"></div>
+      <!-- Vishnu AI — build history (merged from former Dev Log section) -->
+      <div class="arch-block" id="vishnu-history" aria-labelledby="history-heading">
+        <div class="arch-header">
+          <h3 class="arch-title" id="history-heading">How Vishnu AI got here</h3>
+          <p class="arch-note">Four rebuilds. Each one threw out most of what came before.</p>
         </div>
-        <h2 class="sector-title" id="vishnuai-heading">VISHNU AI — DEV LOG</h2>
-        <p class="sector-desc">From a notepad sketch to an autonomous AI system. Four phases, one vision.</p>
-      </header>
 
       <div class="phase-track-wrapper" aria-hidden="true">
         <div class="phase-track-line"></div>
@@ -687,162 +632,93 @@
         </article>
 
       </div>
-    </div>
-  </section>
-
-  <!-- ── RACING TELEMETRY ───────────────────────────────────────── -->
-  <section class="sector sector-telemetry" id="sector-02" aria-labelledby="telemetry-heading">
-    <div class="sector-container">
-      <header class="sector-header">
-        <div class="sector-tag">
-          <span class="sector-num">SECTOR_04</span>
-          <div class="sector-line" aria-hidden="true"></div>
-        </div>
-        <h2 class="sector-title" id="telemetry-heading">RACING TELEMETRY HUB</h2>
-        <p class="sector-desc">Personal lap data from the Nürburgring Nordschleife. This is what the cockpit looks like in real life.</p>
-      </header>
-
-      <div class="telemetry-board" role="region" aria-label="Lap telemetry data">
-        <div class="board-header-strip">
-          <div class="board-circuit-name">
-            <span aria-hidden="true">🏁</span>
-            <div>
-              <div class="circuit-title">NÜRBURGRING NORDSCHLEIFE</div>
-              <div class="circuit-subtitle">GERMANY / 20.832 KM / GP CIRCUIT</div>
-            </div>
-          </div>
-          <div class="board-session-info">
-            <div class="session-label">SESSION</div>
-            <div class="session-value">TIME_ATTACK</div>
-          </div>
-          <div class="board-condition">
-            <div class="session-label">TRACK</div>
-            <div class="session-value condition-dry">DRY ☀</div>
-          </div>
-          <div class="board-condition">
-            <div class="session-label">TEMP</div>
-            <div class="session-value">24°C</div>
-          </div>
-        </div>
-
-        <div class="board-driver-row">
-          <div class="driver-pos" aria-label="Position 1">P1</div>
-          <div class="driver-info">
-            <div class="driver-name">PRANAV / VISHNU</div>
-            <div class="driver-num">#77</div>
-          </div>
-          <div class="car-info">
-            <div class="car-name">NERC GT3</div>
-            <div class="car-subtitle">Mercedes-AMG GT3</div>
-          </div>
-          <div class="board-laptime">
-            <div class="laptime-label">PERSONAL BEST</div>
-            <div class="laptime-value" id="laptimeDisplay" aria-live="polite" aria-label="Lap time">6:38.33<span class="laptime-delta">▲ PB</span></div>
-          </div>
-        </div>
-
-        <div class="board-sectors" aria-label="Sector split times">
-          <div class="sector-col-header">SECTOR SPLITS</div>
-          <div class="sectors-grid">
-            <div class="sector-time-card">
-              <span class="st-label">S1</span>
-              <span class="st-time">1:47.82</span>
-              <span class="st-delta st-normal">+0.00</span>
-            </div>
-            <div class="sector-time-card sector-time-best" aria-label="Sector 2 — Personal best sector">
-              <span class="st-label">S2 ★ BEST</span>
-              <span class="st-time">2:10.44</span>
-              <span class="st-delta st-best">BEST</span>
-            </div>
-            <div class="sector-time-card">
-              <span class="st-label">S3</span>
-              <span class="st-time">2:40.07</span>
-              <span class="st-delta st-normal">+0.00</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="board-telemetry-bars" aria-label="Vehicle telemetry">
-          <div class="telem-bar-item">
-            <span class="telem-bar-label">THROTTLE</span>
-            <div class="telem-bar-track" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" aria-label="Throttle 87%"><div class="telem-bar-fill" data-value="87"></div></div>
-            <span class="telem-bar-value">87%</span>
-          </div>
-          <div class="telem-bar-item">
-            <span class="telem-bar-label">BRAKE</span>
-            <div class="telem-bar-track" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100" aria-label="Brake 32%"><div class="telem-bar-fill telem-brake" data-value="32"></div></div>
-            <span class="telem-bar-value">32%</span>
-          </div>
-          <div class="telem-bar-item">
-            <span class="telem-bar-label">SPEED</span>
-            <div class="telem-bar-track" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" aria-label="Speed 271 km/h"><div class="telem-bar-fill telem-speed" data-value="73"></div></div>
-            <span class="telem-bar-value">271 KM/H</span>
-          </div>
-          <div class="telem-bar-item">
-            <span class="telem-bar-label">GEAR</span>
-            <div class="telem-bar-track" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="5th gear"><div class="telem-bar-fill" data-value="62"></div></div>
-            <span class="telem-bar-value">5th</span>
-          </div>
-        </div>
-
-        <div class="board-bottom-strip">
-          <div><span class="tire-label">TYRE COMPOUND</span><span class="tire-compound">GT3 CUP2 — SOFT</span></div>
-          <div><span class="stint-label">TOTAL LAPS LOGGED</span><span class="stint-value">48</span></div>
-          <div><span class="gap-label">IMPROVEMENT MARGIN</span><span class="gap-value gap-positive">−12.4s TARGET</span></div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── SPRINT MILESTONES ──────────────────────────────────────── -->
-  <section class="sector" id="sector-03" aria-labelledby="milestones-heading">
+  <!-- ── JOURNEY ────────────────────────────────────────────────── -->
+  <section class="sector" id="sector-03" aria-labelledby="journey-heading">
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">SECTOR_05</span>
+          <span class="sector-num">04 &mdash; JOURNEY</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="milestones-heading">SPRINT MILESTONE TRACKER</h2>
-        <p class="sector-desc">How the project got built. Milestones hit, things learned, what's still in the pipeline.</p>
+        <h2 class="sector-title" id="journey-heading">The path so far</h2>
+        <p class="sector-desc">School, projects, and the point where building became the main thing.</p>
       </header>
 
-      <div class="timeline" role="list" aria-label="Project milestones">
+      <div class="timeline" role="list" aria-label="Journey timeline">
         <div class="timeline-track" aria-hidden="true"></div>
 
         <div class="milestone" role="listitem">
           <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-done"><span>✓</span></div>
+            <div class="milestone-node node-done"><span>&#10003;</span></div>
           </div>
-          <article class="milestone-card" aria-label="Milestone 1: Core Architecture — Completed">
+          <article class="milestone-card">
             <div class="milestone-header">
-              <span class="milestone-id">MS_01</span>
+              <span class="milestone-id">CLASS 6 &ndash; 8</span>
               <span class="milestone-status status-done">COMPLETED</span>
             </div>
-            <h3 class="milestone-title">Core Architecture &amp; Stack</h3>
-            <p class="milestone-detail">Got the foundation right — React frontend, Node.js API, PostgreSQL, and CI/CD through GitHub Actions. Everything deployed, everything green.</p>
+            <h3 class="milestone-title">Early school years at BBPS</h3>
+            <p class="milestone-detail">Started strong with 95% in Class 6 and earned a Scholar Badge. Class 7 and 8 were a dip and a recovery &mdash; 70%, then 76%. Around this time I started competing in SOF Olympiads and picked up medals across multiple rounds.</p>
             <div class="milestone-meta">
-              <span class="meta-item">⊛ Sprint 1</span>
-              <span class="meta-item">📅 Jan 2024</span>
-              <span class="meta-item">✦ Done</span>
+              <span class="meta-item">Scholar Badge</span>
+              <span class="meta-item">SOF Olympiads</span>
             </div>
           </article>
         </div>
 
         <div class="milestone" role="listitem">
           <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-done"><span>✓</span></div>
+            <div class="milestone-node node-done"><span>&#10003;</span></div>
           </div>
-          <article class="milestone-card" aria-label="Milestone 2: Telemetry Engine — Completed">
+          <article class="milestone-card">
             <div class="milestone-header">
-              <span class="milestone-id">MS_02</span>
+              <span class="milestone-id">CLASS 9</span>
               <span class="milestone-status status-done">COMPLETED</span>
             </div>
-            <h3 class="milestone-title">Telemetry Engine v1.0</h3>
-            <p class="milestone-detail">Real-time data pipeline for motorsport telemetry. WebSocket streams, sector-split parsing, and D3.js visualization — stress-tested at 10K data points per second.</p>
+            <h3 class="milestone-title">Discipline Prefect &amp; the STEAM robot</h3>
+            <p class="milestone-detail">Elected Discipline Prefect &mdash; real responsibility for coordination and student welfare, not just a badge. Finished the year at 81%. Also built the Smart Elderly Assistance Robot for a STEAM competition: a walking prototype with fall detection, emergency calling, and an onboard medical kit.</p>
             <div class="milestone-meta">
-              <span class="meta-item">⊛ Sprint 3</span>
-              <span class="meta-item">📅 Mar 2024</span>
-              <span class="meta-item">✦ Done</span>
+              <span class="meta-item">Discipline Prefect</span>
+              <span class="meta-item">STEAM Competition</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="milestone" role="listitem">
+          <div class="milestone-connector" aria-hidden="true">
+            <div class="milestone-node node-done"><span>&#10003;</span></div>
+          </div>
+          <article class="milestone-card">
+            <div class="milestone-header">
+              <span class="milestone-id">SOFTWARE</span>
+              <span class="milestone-status status-done">COMPLETED</span>
+            </div>
+            <h3 class="milestone-title">Vishnu AI &mdash; idea to working system</h3>
+            <p class="milestone-detail">Started as a rough idea on paper with no code behind it. Went through a messy multi-model prototype, then a full rebuild, before becoming the version that actually holds up. Four rewrites in total, each one throwing out most of what came before.</p>
+            <div class="milestone-meta">
+              <span class="meta-item">Self-taught</span>
+              <span class="meta-item">4 rebuilds</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="milestone" role="listitem">
+          <div class="milestone-connector" aria-hidden="true">
+            <div class="milestone-node node-done"><span>&#10003;</span></div>
+          </div>
+          <article class="milestone-card">
+            <div class="milestone-header">
+              <span class="milestone-id">POVC</span>
+              <span class="milestone-status status-done">SHIPPED</span>
+            </div>
+            <h3 class="milestone-title">Built this portfolio from scratch</h3>
+            <p class="milestone-detail">No templates, no frameworks &mdash; plain HTML, CSS, and JavaScript with GSAP for motion. Every layout decision, every piece of copy, and the whole information architecture is mine. AI helped me write code faster; it didn&rsquo;t decide what to build.</p>
+            <div class="milestone-meta">
+              <span class="meta-item">HTML &middot; CSS &middot; JS</span>
+              <span class="meta-item">GSAP</span>
             </div>
           </article>
         </div>
@@ -851,273 +727,23 @@
           <div class="milestone-connector" aria-hidden="true">
             <div class="milestone-node node-active">
               <span class="node-pulse" aria-hidden="true"></span>
-              <span>▶</span>
+              <span>&#9654;</span>
             </div>
           </div>
-          <article class="milestone-card card-active" aria-label="Milestone 3: AI Interface Layer — In Progress">
+          <article class="milestone-card card-active">
             <div class="milestone-header">
-              <span class="milestone-id">MS_03</span>
+              <span class="milestone-id">CLASS 10 &mdash; NOW</span>
               <span class="milestone-status status-active">IN PROGRESS</span>
             </div>
-            <h3 class="milestone-title">POVC AI Interface Layer</h3>
-            <p class="milestone-detail">Adding an AI command layer — project search, sprint summaries, performance analytics. The LLM routing through the API gateway is still being hardened before it ships.</p>
-            <div class="milestone-progress">
-              <div class="progress-header">
-                <span class="progress-label">PROGRESS</span>
-                <span class="progress-pct" id="progressPct">0%</span>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill" id="progressFill" data-target="67" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progress: 67%">
-                  <div class="progress-shimmer" aria-hidden="true"></div>
-                </div>
-              </div>
-            </div>
+            <h3 class="milestone-title">Board year, and building for a real client</h3>
+            <p class="milestone-detail">Currently in Class 10. PT1 came back at 57%, which is below where I want to be &mdash; the rest of the year is about closing that gap. Alongside it I&rsquo;m building Vishnu AI Force, an interview automation platform for MKIPL. Balancing both is the actual challenge right now.</p>
             <div class="milestone-meta">
-              <span class="meta-item">⊛ Sprint 6</span>
-              <span class="meta-item">📅 May 2024</span>
-              <span class="meta-item pulse-text">⚡ ACTIVE</span>
+              <span class="meta-item pulse-text">Active</span>
+              <span class="meta-item">Vishnu AI Force</span>
             </div>
           </article>
         </div>
 
-        <div class="milestone" role="listitem">
-          <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-queued"><span>◎</span></div>
-          </div>
-          <article class="milestone-card card-queued" aria-label="Milestone 4: NeonGrid UI v2 — Queued">
-            <div class="milestone-header">
-              <span class="milestone-id">MS_04</span>
-              <span class="milestone-status status-queued">QUEUED</span>
-            </div>
-            <h3 class="milestone-title">NeonGrid UI v2.0 — Public Launch</h3>
-            <p class="milestone-detail">Full open-source release of the NeonGrid component library — npm publish, Storybook docs, accessibility audit, and a contribution framework for other developers to build on.</p>
-            <div class="milestone-meta">
-              <span class="meta-item">⊛ Sprint 8</span>
-              <span class="meta-item">📅 Q3 2024</span>
-              <span class="meta-item">◎ Scheduled</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── LIFE JOURNEY LOG ───────────────────────────────────────── -->
-  <section class="sector sector-life" id="sector-05" aria-labelledby="lifelog-heading">
-    <div class="sector-container">
-      <header class="sector-header">
-        <div class="sector-tag">
-          <span class="sector-num">SECTOR_06</span>
-          <div class="sector-line" aria-hidden="true"></div>
-        </div>
-        <h2 class="sector-title" id="lifelog-heading">LIFE JOURNEY — LEVEL LOG</h2>
-        <p class="sector-desc">Every year is a level. Some cleared, one in progress, the rest still locked.</p>
-      </header>
-
-      <div class="life-xp-header" aria-label="Overall life progress">
-        <div>
-          <span class="life-xp-label">PLAYER</span>
-          <div class="life-xp-name">PRANAV BHATIA</div>
-        </div>
-        <div class="life-xp-bar-wrap life-xp-center">
-          <span class="life-xp-bar-label">OVERALL XP — 40% THROUGH THE MAIN QUEST</span>
-          <div class="life-xp-track" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Overall life XP: 40%">
-            <div class="life-xp-fill" id="lifeXpFill" data-target="40"></div>
-          </div>
-        </div>
-        <div class="life-xp-right">
-          <span class="life-xp-label">CURRENT LEVEL</span>
-          <div class="life-xp-lvl">LVL 10</div>
-        </div>
-      </div>
-
-      <div class="level-grid" role="list" aria-label="Life journey levels">
-
-        <div class="level-card lc-cleared" role="listitem" aria-label="Class 6th — Cleared with 95%">
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">06</span>
-            </div>
-            <span class="lc-badge lc-badge-cleared">★ CLEARED</span>
-          </div>
-          <div class="lc-title">Class 6th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">FINAL SCORE</span>
-            <span class="lc-score lc-score-high">95%</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-high" data-target="95"></div></div>
-          <p class="lc-comment">Scholar badge unlocked.</p>
-        </div>
-
-        <div class="level-card lc-cleared" role="listitem" aria-label="Class 7th — Cleared with 70%">
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">07</span>
-            </div>
-            <span class="lc-badge lc-badge-cleared">★ CLEARED</span>
-          </div>
-          <div class="lc-title">Class 7th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">FINAL SCORE</span>
-            <span class="lc-score lc-score-mid">70%</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-mid" data-target="70"></div></div>
-          <p class="lc-comment">Got distracted. Still passed.</p>
-        </div>
-
-        <div class="level-card lc-cleared" role="listitem" aria-label="Class 8th — Cleared with 76%">
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">08</span>
-            </div>
-            <span class="lc-badge lc-badge-cleared">★ CLEARED</span>
-          </div>
-          <div class="lc-title">Class 8th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">FINAL SCORE</span>
-            <span class="lc-score lc-score-good">76%</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-good" data-target="76"></div></div>
-          <p class="lc-comment">Back on track.</p>
-        </div>
-
-        <div class="level-card lc-cleared" role="listitem" aria-label="Class 9th — Cleared with 81%">
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">09</span>
-            </div>
-            <span class="lc-badge lc-badge-cleared">★ CLEARED</span>
-          </div>
-          <div class="lc-title">Class 9th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">FINAL SCORE</span>
-            <span class="lc-score lc-score-good">81%</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-good" data-target="81"></div></div>
-          <p class="lc-comment">Discipline Prefect year.</p>
-        </div>
-
-        <div class="level-card lc-active" role="listitem" aria-label="Class 10th — In progress, 57% in PT1">
-          <div class="lc-glow-ring" aria-hidden="true"></div>
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">10</span>
-            </div>
-            <span class="lc-badge lc-badge-active">⚡ ACTIVE</span>
-          </div>
-          <div class="lc-title">Class 10th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">PT1 SCORE</span>
-            <span class="lc-score lc-score-warn">57% <span class="lc-emoji">🥺😢</span></span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-warn" id="class10Fill" data-target="57"></div></div>
-          <p class="lc-comment">Still fighting. Not done yet.</p>
-        </div>
-
-        <div class="level-card lc-locked" role="listitem" aria-label="Class 11th — Locked">
-          <span class="lc-lock-icon" aria-hidden="true">🔒</span>
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">11</span>
-            </div>
-            <span class="lc-badge lc-badge-locked">LOCKED</span>
-          </div>
-          <div class="lc-title">Class 11th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">SCORE</span>
-            <span class="lc-score lc-score-locked">NOT YET</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-locked" data-target="0"></div></div>
-          <p class="lc-comment lc-comment-locked">Coming soon.</p>
-        </div>
-
-        <div class="level-card lc-locked" role="listitem" aria-label="Class 12th — Locked">
-          <span class="lc-lock-icon" aria-hidden="true">🔒</span>
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">CLASS</span>
-              <span class="lc-num-val">12</span>
-            </div>
-            <span class="lc-badge lc-badge-locked">LOCKED</span>
-          </div>
-          <div class="lc-title">Class 12th</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">SCORE</span>
-            <span class="lc-score lc-score-locked">NOT YET</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-locked" data-target="0"></div></div>
-          <p class="lc-comment lc-comment-locked">The final school boss.</p>
-        </div>
-
-        <div class="level-card lc-locked lc-boss" role="listitem" aria-label="JEE Mains — Boss Level, Locked">
-          <div class="lc-boss-label">BOSS LEVEL</div>
-          <span class="lc-lock-icon" aria-hidden="true">🔒</span>
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">EXAM</span>
-              <span class="lc-num-val">IIM Test</span>
-            </div>
-            <span class="lc-badge lc-badge-locked">LOCKED</span>
-          </div>
-          <div class="lc-title">IPMAT</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">STATUS</span>
-            <span class="lc-score lc-score-locked">NOT REACHED</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-locked" data-target="0"></div></div>
-          <p class="lc-comment lc-comment-locked">Toughest exam in India.</p>
-        </div>
-
-        <div class="level-card lc-locked lc-legendary" role="listitem" aria-label="MIT — Legendary Level, Locked">
-          <div class="lc-boss-label lc-legendary-label">LEGENDARY</div>
-          <span class="lc-lock-icon" aria-hidden="true">🔒</span>
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">TARGET</span>
-              <span class="lc-num-val">IIM INDORE</span>
-            </div>
-            <span class="lc-badge lc-badge-legendary">LEGENDARY</span>
-          </div>
-          <div class="lc-title">IIM INDORE</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">STATUS</span>
-            <span class="lc-score lc-score-legendary">THE DREAM</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-legendary" data-target="0"></div></div>
-          <p class="lc-comment lc-comment-locked">The whole point.</p>
-        </div>
-
-        <div class="level-card lc-locked lc-maxlevel" role="listitem" aria-label="Career — Max Level, Locked">
-          <div class="lc-boss-label lc-max-label">MAX LEVEL</div>
-          <span class="lc-lock-icon" aria-hidden="true">🚀</span>
-          <div class="lc-top">
-            <div class="lc-num">
-              <span class="lc-num-prefix">END GAME</span>
-              <span class="lc-num-val">∞</span>
-            </div>
-            <span class="lc-badge lc-badge-max">MAX LVL</span>
-          </div>
-          <div class="lc-title">The Career</div>
-          <div class="lc-score-wrap">
-            <span class="lc-score-label">STATUS</span>
-            <span class="lc-score lc-score-max">REAL GAME BEGINS</span>
-          </div>
-          <div class="lc-bar-track"><div class="lc-bar-fill lc-fill-max" data-target="0"></div></div>
-          <p class="lc-comment lc-comment-locked">What all of this is for.</p>
-        </div>
-
-      </div>
-
-      <div class="life-footer-quote" role="note">
-        <span class="lfq-bracket" aria-hidden="true">//</span>
-        <span class="lfq-text">The map isn't finished. The player is still running. Every locked level is just a deadline that hasn't arrived yet.</span>
-        <span class="lfq-bracket" aria-hidden="true">//</span>
       </div>
     </div>
   </section>
@@ -1127,10 +753,10 @@
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">SECTOR_07</span>
+          <span class="sector-num">05 &mdash; RECOGNITION</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="achievements-heading">ACHIEVEMENT VAULT</h2>
+        <h2 class="sector-title" id="achievements-heading">Recognition</h2>
         <p class="sector-desc">Things I've actually earned — no padding, no fluff.</p>
       </header>
 
@@ -1222,10 +848,10 @@
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">SECTOR_08</span>
+          <span class="sector-num">06 &mdash; CONTACT</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="contact-heading">OPEN COMMS CHANNEL</h2>
+        <h2 class="sector-title" id="contact-heading">Get in touch</h2>
         <p class="sector-desc">Ping me. If you've got something worth building, I'm listening.</p>
       </header>
 
@@ -1295,18 +921,16 @@
       <div class="footer-links">
         <div class="footer-col">
           <div class="footer-col-title">NAVIGATE</div>
-          <a href="#hero" class="footer-link">HOME</a>
-          <a href="#about" class="footer-link">ABOUT</a>
-          <a href="#skills" class="footer-link">SKILLS</a>
-          <a href="#sector-01" class="footer-link">PROJECTS</a>
-          <a href="#sector-04" class="footer-link">VISHNU AI</a>
+          <a href="#home" class="footer-link">Home</a>
+          <a href="#skills" class="footer-link">What I Build</a>
+          <a href="#sector-01" class="footer-link">Projects</a>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">MORE</div>
-          <a href="#sector-02" class="footer-link">TELEMETRY</a>
-          <a href="#sector-05" class="footer-link">LIFE LOG</a>
-          <a href="#achievements" class="footer-link">AWARDS</a>
-          <a href="#contact" class="footer-link">CONTACT</a>
+          <a href="#about" class="footer-link">About</a>
+          <a href="#sector-03" class="footer-link">Journey</a>
+          <a href="#achievements" class="footer-link">Recognition</a>
+          <a href="#contact" class="footer-link">Contact</a>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">CONNECT</div>
