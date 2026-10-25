@@ -81,10 +81,7 @@ function bootAll() {
   initScrollProgress();
   heroEntrance();
   initSectorAnimations();
-  initPhaseBar();
-  initStatCounters();
   initContactTerminal();
-  initKeyboardA11y();
   initActiveNav();
   consoleGreeting();
 }
@@ -158,7 +155,7 @@ function initCursor() {
   document.addEventListener('mouseenter', () => { dot.style.opacity='1'; ring.style.opacity='1'; });
 
   // Expand ring on hoverable elements
-  const hoverEls = document.querySelectorAll('a,button,.project-card,.contact-card,.achievement-card,.phase-card,.build-card');
+  const hoverEls = document.querySelectorAll('a,button,.contact-card,.achievement-card,.build-card');
   hoverEls.forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
     el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
@@ -234,180 +231,52 @@ function heroEntrance() {
    12. SCROLLTRIGGER SECTOR ANIMATIONS
 ============================================================ */
 function initSectorAnimations() {
-  // Helper: animate section header
-  const animHeader = (trigger) => {
-    gsap.fromTo(`${trigger} .sector-header`,
-      { opacity:0, x:-28 },
-      { opacity:1, x:0, duration:0.8, ease:'power3.out',
-        scrollTrigger:{ trigger, start:'top 80%', toggleActions:'play none none none' }
-      }
-    );
+  const reveal = (targets, from, to, trigger, start = 'top 80%') => {
+    if (!document.querySelector(Array.isArray(targets) ? targets[0] : targets)) return;
+    gsap.fromTo(targets, from, {
+      ...to,
+      scrollTrigger: { trigger, start, toggleActions: 'play none none none' }
+    });
   };
 
-  ['#about','#skills','#sector-01','#sector-04','#sector-02','#sector-03','#sector-05','#achievements','#contact']
-    .forEach(animHeader);
-
-  // About cards
-  gsap.fromTo(['.about-identity-card','.about-bio'],
-    { opacity:0, y:30 },
-    { opacity:1, y:0, duration:0.8, stagger:0.15, ease:'power2.out',
-      scrollTrigger:{ trigger:'#about', start:'top 72%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Quick fact items
-  gsap.fromTo('.aqf-item',
-    { opacity:0, x:-18 },
-    { opacity:1, x:0, duration:0.55, stagger:0.1, ease:'power2.out',
-      scrollTrigger:{ trigger:'.about-quick-facts', start:'top 82%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Skill categories
-  gsap.fromTo('.skill-category',
-    { opacity:0, y:24 },
-    { opacity:1, y:0, duration:0.6, stagger:0.12, ease:'power2.out',
-      scrollTrigger:{ trigger:'.skills-grid', start:'top 78%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Tech pills
-  gsap.fromTo('.tech-pill',
-    { opacity:0, scale:0.88 },
-    { opacity:1, scale:1, duration:0.4, stagger:0.04, ease:'back.out(1.4)',
-      scrollTrigger:{ trigger:'.tech-stack', start:'top 85%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Project cards
-  gsap.fromTo('.project-card',
-    { opacity:0, y:36 },
-    { opacity:1, y:0, duration:0.7, stagger:0.14, ease:'power2.out',
-      scrollTrigger:{ trigger:'#sector-01', start:'top 75%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Vishnu AI Force — architecture flow steps
-  gsap.fromTo('.arch-step',
-    { opacity:0, x:-16 },
-    { opacity:1, x:0, duration:0.45, stagger:0.09, ease:'power2.out',
-      scrollTrigger:{ trigger:'.arch-flow', start:'top 82%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Vishnu AI Force — feature cards
-  gsap.fromTo('.arch-feature-card',
-    { opacity:0, y:20 },
-    { opacity:1, y:0, duration:0.55, stagger:0.1, ease:'power2.out',
-      scrollTrigger:{ trigger:'.arch-features-grid', start:'top 85%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Phase cards
-  gsap.fromTo('.phase-track-line',
-    { scaleX:0, transformOrigin:'left center' },
-    { scaleX:1, duration:1, ease:'power2.out',
-      scrollTrigger:{ trigger:'#sector-04', start:'top 72%', toggleActions:'play none none none' }
-    }
-  );
-  gsap.fromTo('.phase-card',
-    { opacity:0, y:28 },
-    { opacity:1, y:0, duration:0.65, stagger:0.12, ease:'power2.out',
-      scrollTrigger:{ trigger:'.phases-grid', start:'top 78%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Timeline track
-  gsap.fromTo('.timeline-track',
-    { scaleY:0, transformOrigin:'top center' },
-    { scaleY:1, duration:1.2, ease:'power2.out',
-      scrollTrigger:{ trigger:'.timeline', start:'top 75%', toggleActions:'play none none none' }
-    }
-  );
-
-  // Milestones
-  document.querySelectorAll('.milestone').forEach((ms, i) => {
-    gsap.fromTo(ms,
-      { opacity:0, x:-28 },
-      { opacity:1, x:0, duration:0.7, delay:i*0.12, ease:'power3.out',
-        scrollTrigger:{ trigger:ms, start:'top 86%', toggleActions:'play none none none' }
-      }
-    );
+  // Section headers
+  ['#about', '#skills', '#projects', '#achievements', '#contact'].forEach(id => {
+    reveal(`${id} .sector-header`, { opacity: 0, x: -28 },
+      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, id);
   });
 
-  // Achievement cards
-  gsap.fromTo('.achievement-card',
-    { opacity:0, y:24 },
-    { opacity:1, y:0, duration:0.6, stagger:0.1, ease:'power2.out',
-      scrollTrigger:{ trigger:'.achievements-grid', start:'top 78%', toggleActions:'play none none none' }
-    }
-  );
+  // About
+  reveal(['.about-identity-card', '.about-bio'], { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out' }, '#about', 'top 72%');
+  reveal('.aqf-item', { opacity: 0, x: -18 },
+    { opacity: 1, x: 0, duration: 0.55, stagger: 0.1, ease: 'power2.out' }, '.about-quick-facts', 'top 82%');
 
-  // Contact cards
-  gsap.fromTo('.contact-card',
-    { opacity:0, y:22 },
-    { opacity:1, y:0, duration:0.6, stagger:0.12, ease:'power2.out',
-      scrollTrigger:{ trigger:'.contact-grid', start:'top 80%', toggleActions:'play none none none' }
-    }
-  );
+  // What I build
+  reveal('.build-card', { opacity: 0, y: 24 },
+    { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power2.out' }, '.build-grid', 'top 80%');
+  reveal('.tech-pill', { opacity: 0, scale: 0.9 },
+    { opacity: 1, scale: 1, duration: 0.4, stagger: 0.04, ease: 'back.out(1.4)' }, '.tech-stack', 'top 85%');
+  reveal('.now-block', { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '.now-block', 'top 88%');
 
-  // Contact terminal
-  gsap.fromTo('.contact-terminal',
-    { opacity:0, x:-18 },
-    { opacity:1, x:0, duration:0.7, ease:'power3.out',
-      scrollTrigger:{ trigger:'.contact-terminal', start:'top 88%', toggleActions:'play none none none' }
-    }
-  );
+  // Projects (under construction)
+  reveal('.wip', { opacity: 0, y: 28 },
+    { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '.wip', 'top 82%');
 
-  // Life quote
-  gsap.fromTo('.life-footer-quote',
-    { opacity:0, x:-18 },
-    { opacity:1, x:0, duration:0.8, ease:'power3.out',
-      scrollTrigger:{ trigger:'.life-footer-quote', start:'top 90%', toggleActions:'play none none none' }
-    }
-  );
+  // Recognition
+  reveal('.achievement-card', { opacity: 0, y: 24 },
+    { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, '.achievements-grid', 'top 80%');
+
+  // Contact
+  reveal('.contact-card', { opacity: 0, y: 22 },
+    { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power2.out' }, '.contact-grid', 'top 82%');
+  reveal('.contact-terminal', { opacity: 0, x: -18 },
+    { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '.contact-terminal', 'top 90%');
 }
 
 /* ============================================================
    13. SKILL BARS
 ============================================================ */
-/* ============================================================
-   16. VISHNU AI V.FORCE BAR
-============================================================ */
-function initPhaseBar() {
-  ScrollTrigger.create({
-    trigger: '.phase-active',
-    start: 'top 80%',
-    onEnter: () => {
-      const fill = document.getElementById('vforceFill');
-      if (fill) { setTimeout(() => { fill.style.width = (fill.getAttribute('data-target') || '94') + '%'; }, 300); }
-    }
-  });
-}
-
-/* ============================================================
-   18. ANIMATED STAT COUNTERS
-============================================================ */
-function initStatCounters() {
-  ScrollTrigger.create({
-    trigger: '#statsRow',
-    start: 'top 80%',
-    onEnter: () => {
-      document.querySelectorAll('.sc-val[data-target]').forEach(el => {
-        const target = parseInt(el.getAttribute('data-target'));
-        const dur = 1800, start = performance.now();
-        const ease = t => 1 - Math.pow(1 - t, 3);
-        const tick = now => {
-          const p = Math.min((now - start) / dur, 1);
-          el.textContent = Math.floor(ease(p) * target);
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      });
-    }
-  });
-}
-
 /* ============================================================
    19. CONTACT TERMINAL TYPEOUT
 ============================================================ */
@@ -424,21 +293,6 @@ function initContactTerminal() {
         }, 600 + i * 400);
       });
     }
-  });
-}
-
-/* ============================================================
-   21. KEYBOARD ACCESSIBILITY
-============================================================ */
-function initKeyboardA11y() {
-  document.querySelectorAll('.project-card[tabindex]').forEach(card => {
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const link = card.querySelector('.card-link');
-        if (link) link.click();
-      }
-    });
   });
 }
 
@@ -467,14 +321,12 @@ function initActiveNav() {
   const navLinks = document.querySelectorAll('.nav-link');
   if (!sections.length || !navLinks.length) return;
 
-  // Maps section id -> nav label. Sections not listed here (skills,
-  // achievements) intentionally don't own a top-level nav item.
+  // Sections listed here own a nav item; skills/achievements intentionally don't.
   const sectionMap = {
-    'home':      'HOME',
-    'sector-01': 'PROJECTS',
-    'about':     'ABOUT',
-    'sector-03': 'JOURNEY',
-    'contact':   'CONTACT'
+    'home':     'HOME',
+    'about':    'ABOUT',
+    'projects': 'PROJECTS',
+    'contact':  'CONTACT'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -505,6 +357,4 @@ function initActiveNav() {
  * Check if user prefers reduced motion
  * Used to skip heavy animations gracefully
  */
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+

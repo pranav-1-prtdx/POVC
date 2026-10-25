@@ -6,15 +6,15 @@
 
   <!-- ── SEO & Identity ── -->
   <title>POVC — Portfolio Of Vishnu Creator | Pranav Bhatia</title>
-  <meta name="description" content="Pranav Bhatia — 15-year-old AI builder, frontend engineer, and motorsport competitor from India. Creator of Vishnu AI V.Force. This is POVC." />
-  <meta name="keywords" content="Pranav Bhatia, POVC, Vishnu AI, Portfolio, Frontend Engineer, AI Developer, India" />
+  <meta name="description" content="Pranav Bhatia — Class 10 student from India building AI, automation and web projects. This is POVC, Portfolio Of Vishnu Creator." />
+  <meta name="keywords" content="Pranav Bhatia, POVC, Vishnu Creator, Portfolio, Student Developer, AI, Automation, India" />
   <meta name="author" content="Pranav Bhatia" />
   <meta name="theme-color" content="#fbfbfc" id="themeColorMeta" />
   <link rel="canonical" href="https://povc.vercel.app/" />
 
   <!-- ── Open Graph ── -->
   <meta property="og:title" content="POVC — Portfolio Of Vishnu Creator" />
-  <meta property="og:description" content="Pranav Bhatia — AI builder, frontend engineer, motorsport competitor. Creator of Vishnu AI V.Force. This is POVC." />
+  <meta property="og:description" content="Pranav Bhatia — Class 10 student from India building AI, automation and web projects. This is POVC, Portfolio Of Vishnu Creator." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://povc.vercel.app/" />
   <meta property="og:image" content="https://povc.vercel.app/assets/profile.jpg" />
@@ -24,7 +24,7 @@
   <!-- ── Twitter Card ── -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="POVC — Portfolio Of Vishnu Creator" />
-  <meta name="twitter:description" content="Pranav Bhatia — AI builder, frontend engineer, motorsport competitor. Creator of Vishnu AI V.Force." />
+  <meta name="twitter:description" content="Pranav Bhatia — Class 10 student from India building AI, automation and web projects. This is POVC, Portfolio Of Vishnu Creator." />
   <meta name="twitter:image" content="https://povc.vercel.app/assets/profile.jpg" />
 
   <!-- ── Favicon ── -->
@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Custom Cursor -->
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
@@ -101,17 +102,12 @@
       <span class="nav-logo-bracket">[</span>POVC<span class="nav-logo-bracket">]</span>
     </a>
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#home"      class="nav-link" aria-label="Home">HOME</a></li>
-      <li><a href="#sector-01" class="nav-link" aria-label="Projects">PROJECTS</a></li>
-      <li><a href="#about"     class="nav-link" aria-label="About Pranav">ABOUT</a></li>
-      <li><a href="#sector-03" class="nav-link" aria-label="Journey">JOURNEY</a></li>
-      <li><a href="#contact"   class="nav-link" aria-label="Contact">CONTACT</a></li>
+      <li><a href="#home"     class="nav-link" aria-label="Home">HOME</a></li>
+      <li><a href="#about"    class="nav-link" aria-label="About Pranav">ABOUT</a></li>
+      <li><a href="#projects" class="nav-link" aria-label="Projects">PROJECTS</a></li>
+      <li><a href="#contact"  class="nav-link" aria-label="Contact">CONTACT</a></li>
     </ul>
     <div class="nav-actions">
-      <div class="nav-status" aria-label="Status: available">
-        <span class="status-dot pulse" aria-hidden="true"></span>
-        <span>Available</span>
-      </div>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -127,6 +123,7 @@
     </div>
   </nav>
 
+  <main id="main">
   <!-- ── HERO ──────────────────────────────────────────────────── -->
   <section class="hero-section" id="home" aria-label="Introduction">
     <div class="hero-grid-bg" aria-hidden="true"></div>
@@ -138,17 +135,17 @@
     <div class="hero-content">
       <div class="hero-kicker" id="heroPre">STUDENT · DEVELOPER · BUILDER</div>
       <h1 class="hero-name" id="heroName">Pranav Bhatia</h1>
-      <p class="hero-alias" id="heroRealName">also known as <strong>VISHNU</strong> — this is POVC</p>
+      <p class="hero-alias" id="heroRealName">POVC &mdash; Portfolio Of <strong>Vishnu Creator</strong></p>
       <p class="hero-tagline" id="heroSubtitle">Turning ideas into real products.</p>
-      <p class="hero-sub" id="heroTerminal">I'm a Class 10 student in India who builds AI-powered software — from a self-taught idea to an interview automation platform now being built for a real company. This portfolio is one of those things too.</p>
+      <p class="hero-sub" id="heroTerminal">I&rsquo;m a Class 10 student from India. I build software &mdash; mostly AI, automation and web projects &mdash; and I&rsquo;m currently working on an AI interview platform.</p>
 
       <div class="hero-cta" id="heroCta">
-        <a href="#sector-01" class="btn btn-primary">
-          View Projects
+        <a href="#about" class="btn btn-primary">
+          About Me
           <span class="btn-glow" aria-hidden="true"></span>
         </a>
-        <a href="#about" class="btn btn-secondary">
-          About Me
+        <a href="#contact" class="btn btn-secondary">
+          Get in touch
         </a>
       </div>
 
@@ -173,7 +170,7 @@
           <div class="sector-line" aria-hidden="true"></div>
         </div>
         <h2 class="sector-title" id="about-heading">About me</h2>
-        <p class="sector-desc">Who I am, where I came from, and where I'm going.</p>
+        <p class="sector-desc">A short introduction.</p>
       </header>
 
       <div class="about-grid">
@@ -184,7 +181,7 @@
             </div>
             <div class="aic-info">
               <div class="aic-name">Pranav Bhatia</div>
-              <div class="aic-alias">VISHNU</div>
+              <div class="aic-alias">Vishnu Creator</div>
               <div class="aic-role">Student &amp; Developer</div>
             </div>
           </div>
@@ -205,54 +202,43 @@
               <dt class="aic-key">FOCUS</dt>
               <dd class="aic-val">AI &middot; Web &middot; Automation</dd>
             </div>
-            <div class="aic-stat-row">
-              <dt class="aic-key">LEARNING</dt>
-              <dd class="aic-val">Self-taught</dd>
-            </div>
           </dl>
           <div class="aic-badges" aria-label="Interests">
-            <span class="aic-badge">AI Systems</span>
-            <span class="aic-badge">Frontend</span>
+            <span class="aic-badge">AI</span>
+            <span class="aic-badge">Web</span>
+            <span class="aic-badge">Automation</span>
             <span class="aic-badge">Robotics</span>
-            <span class="aic-badge">Sim Racing</span>
           </div>
         </div>
 
         <div class="about-bio">
           <div class="about-bio-text">
-            <p>I&rsquo;m <span class="about-highlight">Pranav Bhatia</span>, a Class 10 student in India. Most people online know me as <span class="about-highlight">VISHNU</span> &mdash; that&rsquo;s where the name POVC comes from.</p>
-            <p>I got into building because following tutorials got boring fast. Vishnu AI started as a rough idea I couldn&rsquo;t actually execute yet, and I rebuilt it four times before it did what I wanted. That loop &mdash; build it badly, understand why, start over &mdash; is basically how I&rsquo;ve learned everything.</p>
-            <p>Right now my work sits across AI systems, web development, and automation. I have no formal CS training, so I lean hard on documentation, trial and error, and shipping things that other people will actually use.</p>
-            <p>I&rsquo;m still a student, so I&rsquo;m not going to pretend I have years of industry experience. What I do have is a handful of real projects, one of them being built for an actual company, and the patience to keep rewriting something until it works.</p>
+            <p>I&rsquo;m <span class="about-highlight">Pranav Bhatia</span>, a Class 10 student from India. I build software &mdash; mostly AI, automation and web projects. &ldquo;Vishnu Creator&rdquo; is the name I build under, and POVC is this portfolio.</p>
+            <p>Right now I&rsquo;m working on <span class="about-highlight">Vishnu AI Force</span>, an AI interview automation platform. I&rsquo;ve also built a walking elderly-assistance robot prototype for a STEAM competition.</p>
+            <p>This website is hand-written HTML, CSS and JavaScript. I planned the structure, design and content myself and used AI as a development assistant.</p>
+            <p>I&rsquo;m still a student, and I&rsquo;d rather show real work than big claims. Detailed project write-ups are coming soon.</p>
           </div>
 
           <div class="about-quick-facts" role="list">
             <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">&#9889;</span>
+              <span class="aqf-icon" aria-hidden="true">&#129302;</span>
               <div>
-                <div class="aqf-title">Self-taught</div>
-                <div class="aqf-desc">No CS classes, no bootcamps &mdash; documentation, forums, and a lot of broken builds.</div>
+                <div class="aqf-title">Vishnu AI Force</div>
+                <div class="aqf-desc">An AI interview automation platform, currently in development.</div>
               </div>
             </div>
             <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">&#129302;</span>
+              <span class="aqf-icon" aria-hidden="true">&#129438;</span>
               <div>
-                <div class="aqf-title">Building Vishnu AI</div>
-                <div class="aqf-desc">An interview automation platform, currently in development for a real client.</div>
+                <div class="aqf-title">Smart Elderly Assistance Robot</div>
+                <div class="aqf-desc">A walking prototype with fall detection, emergency calling and a medical kit, built for a STEAM competition.</div>
               </div>
             </div>
             <div class="aqf-item" role="listitem">
               <span class="aqf-icon" aria-hidden="true">&#127891;</span>
               <div>
-                <div class="aqf-title">Competing academically</div>
-                <div class="aqf-desc">Five SOF Olympiad medals and a Scholar Badge along the way.</div>
-              </div>
-            </div>
-            <div class="aqf-item" role="listitem">
-              <span class="aqf-icon" aria-hidden="true">&#128101;</span>
-              <div>
-                <div class="aqf-title">Discipline Prefect</div>
-                <div class="aqf-desc">Elected at BBPS &mdash; coordination and student welfare, not just a title.</div>
+                <div class="aqf-title">School &amp; awards</div>
+                <div class="aqf-desc">Discipline Prefect, five SOF Olympiad medals and a Scholar Badge.</div>
               </div>
             </div>
           </div>
@@ -269,48 +255,46 @@
           <span class="sector-num">02 &mdash; WHAT I BUILD</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="skills-heading">Where I spend my time</h2>
-        <p class="sector-desc">Four areas I keep coming back to &mdash; each one has something real behind it.</p>
+        <h2 class="sector-title" id="skills-heading">What I build</h2>
+        <p class="sector-desc">The areas I work in, and the projects behind each one.</p>
       </header>
 
       <div class="build-grid" role="list">
         <div class="build-card" role="listitem">
           <span class="build-icon" aria-hidden="true">&#129302;</span>
           <h3 class="build-title">AI Systems</h3>
-          <p class="build-desc">LLM integration, prompt design, and wiring models into workflows that run without a human watching. Vishnu AI is where most of this happens.</p>
+          <p class="build-desc">Working with LLMs. Vishnu AI Force uses GPT-4o, with ElevenLabs for voice.</p>
         </div>
         <div class="build-card" role="listitem">
           <span class="build-icon" aria-hidden="true">&#128187;</span>
           <h3 class="build-title">Web &amp; Frontend</h3>
-          <p class="build-desc">Interfaces built from scratch &mdash; HTML, CSS, JavaScript, and GSAP for motion. No frameworks unless the project genuinely needs one.</p>
+          <p class="build-desc">Hand-written HTML, CSS and JavaScript with GSAP. This portfolio is one example.</p>
         </div>
         <div class="build-card" role="listitem">
           <span class="build-icon" aria-hidden="true">&#9881;&#65039;</span>
           <h3 class="build-title">Automation</h3>
-          <p class="build-desc">Backend services and browser automation that remove repetitive work. Flask APIs, Playwright scripts, and scheduled jobs.</p>
+          <p class="build-desc">Browser automation with Playwright, as used inside Vishnu AI Force.</p>
         </div>
         <div class="build-card" role="listitem">
           <span class="build-icon" aria-hidden="true">&#129691;</span>
           <h3 class="build-title">Hardware &amp; Robotics</h3>
-          <p class="build-desc">Physical prototypes where software meets sensors. The Smart Elderly Robot came out of this &mdash; a walking build with fall detection.</p>
+          <p class="build-desc">The Smart Elderly Assistance Robot, a walking prototype built for a STEAM competition.</p>
         </div>
       </div>
 
       <div class="tech-stack">
-        <div class="tech-stack-label">TOOLS I WORK WITH</div>
+        <div class="tech-stack-label">TOOLS I&rsquo;VE USED</div>
         <div class="tech-pills" role="list" aria-label="Technologies and tools">
           <span class="tech-pill" role="listitem">Python</span>
-          <span class="tech-pill" role="listitem">JavaScript</span>
-          <span class="tech-pill" role="listitem">HTML5</span>
-          <span class="tech-pill" role="listitem">CSS3</span>
-          <span class="tech-pill" role="listitem">GSAP</span>
           <span class="tech-pill" role="listitem">Flask</span>
           <span class="tech-pill" role="listitem">SQLite</span>
           <span class="tech-pill" role="listitem">GPT-4o</span>
           <span class="tech-pill" role="listitem">ElevenLabs</span>
           <span class="tech-pill" role="listitem">Playwright</span>
-          <span class="tech-pill" role="listitem">Git</span>
-          <span class="tech-pill" role="listitem">Vercel</span>
+          <span class="tech-pill" role="listitem">JavaScript</span>
+          <span class="tech-pill" role="listitem">HTML5</span>
+          <span class="tech-pill" role="listitem">CSS3</span>
+          <span class="tech-pill" role="listitem">GSAP</span>
         </div>
       </div>
 
@@ -322,523 +306,104 @@
         <div class="now-list" role="list">
           <div class="now-item" role="listitem">
             <div class="now-item-name">Vishnu AI Force</div>
-            <div class="now-item-desc">AI interview automation platform &mdash; in development for MKIPL.</div>
+            <div class="now-item-desc">An AI interview automation platform, in development.</div>
           </div>
           <div class="now-item" role="listitem">
-            <div class="now-item-name">POVC 2.0</div>
-            <div class="now-item-desc">This portfolio &mdash; rebuilt as a proper professional site.</div>
-          </div>
-          <div class="now-item" role="listitem">
-            <div class="now-item-name">Class 10 boards</div>
-            <div class="now-item-desc">The other full-time project this year.</div>
+            <div class="now-item-name">POVC</div>
+            <div class="now-item-desc">This portfolio. Project write-ups are coming next.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
   <!-- ── PROJECTS ───────────────────────────────────────────────── -->
-  <section class="sector" id="sector-01" aria-labelledby="projects-heading">
+  <section class="sector" id="projects" aria-labelledby="projects-heading">
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
           <span class="sector-num">03 &mdash; PROJECTS</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
-        <h2 class="sector-title" id="projects-heading">Things I&rsquo;ve built</h2>
-        <p class="sector-desc">Things I've actually shipped. Each card is a real project, not a mock-up.</p>
+        <h2 class="sector-title" id="projects-heading">Projects</h2>
+        <p class="sector-desc">Vishnu AI Force, POVC, and the Smart Elderly Assistance Robot.</p>
       </header>
 
-      <div class="dev-grid">
-
-        <!-- Vishnu AI V.Force — Featured -->
-        <article class="project-card card-featured" tabindex="0" aria-labelledby="proj1-title">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="card-corner card-corner-tl" aria-hidden="true"></div>
-          <div class="card-corner card-corner-tr" aria-hidden="true"></div>
-          <div class="card-header">
-            <div class="card-logo" aria-hidden="true">
-              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="30,4 56,18 56,42 30,56 4,42 4,18" stroke="var(--accent-cyan)" stroke-width="1.5" fill="none" opacity="0.6"/>
-                <polygon points="30,12 48,22 48,38 30,48 12,38 12,22" stroke="var(--accent-green)" stroke-width="1" fill="none" opacity="0.8"/>
-                <circle cx="30" cy="30" r="8" fill="var(--accent-green)" opacity="0.15"/>
-                <circle cx="30" cy="30" r="4" fill="var(--accent-green)" opacity="0.9"/>
-              </svg>
-            </div>
-            <div class="card-meta">
-              <span class="card-id">PROJ_001</span>
-              <span class="card-status card-status-confidential">◆ CONFIDENTIAL</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" id="proj1-title">Vishnu AI <span class="card-title-accent">Force</span></h3>
-            <p class="card-desc">An AI interview automation platform built for <span class="card-client">MKIPL</span> — it parses resumes, generates role-specific questions, conducts the interview through a Google Meet bot, and scores the candidate automatically. Client work, so the UI stays private — the architecture doesn't.</p>
-          </div>
-          <div class="card-tags">
-            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">GPT-4o</span>
-            <span class="tag">SQLite</span><span class="tag">Playwright</span><span class="tag">ElevenLabs</span>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats">
-              <span class="card-stat"><span class="stat-num">MKIPL</span> client</span>
-              <span class="card-stat"><span class="stat-num">Force</span> current</span>
-            </div>
-            <a href="#vishnu-arch" class="card-link" aria-label="View Vishnu AI Force architecture">VIEW ARCHITECTURE →</a>
-          </div>
-        </article>
-
-        <!-- POVC -->
-        <article class="project-card" tabindex="0" aria-labelledby="proj2-title">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="card-corner card-corner-tl" aria-hidden="true"></div>
-          <div class="card-corner card-corner-tr" aria-hidden="true"></div>
-          <div class="card-header">
-            <div class="card-logo card-logo-sm" aria-hidden="true">
-              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="8" width="44" height="44" rx="2" stroke="var(--accent-cyan)" stroke-width="1.2" fill="none" opacity="0.5"/>
-                <line x1="8" y1="20" x2="52" y2="20" stroke="var(--accent-green)" stroke-width="0.8" opacity="0.5"/>
-                <rect x="14" y="28" width="14" height="18" rx="1" fill="var(--accent-green)" opacity="0.2" stroke="var(--accent-green)" stroke-width="0.8"/>
-                <rect x="34" y="24" width="12" height="22" rx="1" fill="var(--accent-cyan)" opacity="0.15" stroke="var(--accent-cyan)" stroke-width="0.8"/>
-              </svg>
-            </div>
-            <div class="card-meta">
-              <span class="card-id">PROJ_002</span>
-              <span class="card-status card-status-live">● LIVE</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" id="proj2-title">POVC</h3>
-            <p class="card-desc">The portfolio you're looking at right now. Built from scratch with zero frameworks — pure HTML, CSS, and JavaScript. Cyber cockpit theme, full GSAP animations, an F1 timing board, and a life RPG tracker.</p>
-          </div>
-          <div class="card-tags">
-            <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JS ES6+</span><span class="tag">GSAP</span>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats">
-              <span class="card-stat"><span class="stat-num">7</span> sectors</span>
-              <span class="card-stat"><span class="stat-num">100%</span> custom</span>
-            </div>
-            <a href="https://github.com/pranav-1-prtdx" target="_blank" rel="noopener noreferrer" class="card-link" aria-label="View POVC on GitHub">GITHUB →</a>
-          </div>
-        </article>
-
-        <!-- Smart Elderly Robot -->
-        <article class="project-card" tabindex="0" aria-labelledby="proj3-title">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="card-corner card-corner-tl" aria-hidden="true"></div>
-          <div class="card-corner card-corner-tr" aria-hidden="true"></div>
-          <div class="card-header">
-            <div class="card-logo card-logo-sm" aria-hidden="true">
-              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="18" y="6" width="24" height="20" rx="4" stroke="var(--accent-cyan)" stroke-width="1.2" fill="none" opacity="0.7"/>
-                <circle cx="26" cy="14" r="3" fill="var(--accent-cyan)" opacity="0.7"/>
-                <circle cx="34" cy="14" r="3" fill="var(--accent-cyan)" opacity="0.7"/>
-                <rect x="22" y="26" width="16" height="20" rx="2" stroke="var(--accent-green)" stroke-width="1" fill="none" opacity="0.6"/>
-                <line x1="14" y1="30" x2="22" y2="30" stroke="var(--accent-green)" stroke-width="1.5" opacity="0.7" stroke-linecap="round"/>
-                <line x1="38" y1="30" x2="46" y2="30" stroke="var(--accent-green)" stroke-width="1.5" opacity="0.7" stroke-linecap="round"/>
-                <line x1="26" y1="46" x2="26" y2="56" stroke="var(--accent-cyan)" stroke-width="1.5" opacity="0.7"/>
-                <line x1="34" y1="46" x2="34" y2="56" stroke="var(--accent-cyan)" stroke-width="1.5" opacity="0.7"/>
-              </svg>
-            </div>
-            <div class="card-meta">
-              <span class="card-id">PROJ_003</span>
-              <span class="card-status card-status-beta">◑ STEAM PROTOTYPE</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" id="proj3-title">Smart Elderly Robot</h3>
-            <p class="card-desc">A walking prototype built for a STEAM competition. The idea was simple — give elderly people a machine that can actually look after them when no one else is around.</p>
-          </div>
-          <div class="card-feature-list" role="list" aria-label="Robot features">
-            <span class="cfl-item" role="listitem"><span aria-hidden="true">🚶</span> Walking Prototype</span>
-            <span class="cfl-item" role="listitem"><span aria-hidden="true">⚠️</span> Fall Detection</span>
-            <span class="cfl-item" role="listitem"><span aria-hidden="true">📞</span> Emergency Calling</span>
-            <span class="cfl-item" role="listitem"><span aria-hidden="true">🩹</span> Medical Kit</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag">Robotics</span><span class="tag">Python</span><span class="tag">AI</span><span class="tag">IoT</span>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats">
-              <span class="card-stat"><span class="stat-num">4</span> features</span>
-              <span class="card-stat"><span class="stat-num">STEAM</span> comp.</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- Vishnu AI Force — Architecture Diagram (confidentiality-safe) -->
-      <div class="arch-block" id="vishnu-arch" aria-labelledby="arch-heading">
-        <div class="arch-header">
-          <h3 class="arch-title" id="arch-heading">VISHNU AI FORCE — SYSTEM ARCHITECTURE</h3>
-          <p class="arch-note">The interview UI is client-confidential under MKIPL. This is the data flow instead.</p>
+      <div class="wip">
+        <div class="wip-grid" aria-hidden="true">
+          <div class="wip-card"><div class="wip-bar wip-bar-lg"></div><div class="wip-bar wip-bar-md"></div><div class="wip-bar wip-bar-sm"></div><div class="wip-bar wip-bar-md"></div><div class="wip-tags"><span class="wip-tag"></span><span class="wip-tag"></span><span class="wip-tag"></span></div></div>
+          <div class="wip-card"><div class="wip-bar wip-bar-lg"></div><div class="wip-bar wip-bar-md"></div><div class="wip-bar wip-bar-sm"></div><div class="wip-bar wip-bar-md"></div><div class="wip-tags"><span class="wip-tag"></span><span class="wip-tag"></span><span class="wip-tag"></span></div></div>
+          <div class="wip-card"><div class="wip-bar wip-bar-lg"></div><div class="wip-bar wip-bar-md"></div><div class="wip-bar wip-bar-sm"></div><div class="wip-bar wip-bar-md"></div><div class="wip-tags"><span class="wip-tag"></span><span class="wip-tag"></span><span class="wip-tag"></span></div></div>
         </div>
-
-        <div class="arch-flow" role="list" aria-label="System architecture flow">
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">📄</span><span class="arch-step-label">Resume</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">🔍</span><span class="arch-step-label">Resume Parser</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step arch-step-highlight" role="listitem"><span class="arch-step-icon" aria-hidden="true">🧠</span><span class="arch-step-label">GPT-4o</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">❓</span><span class="arch-step-label">Question Generator</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">🎙️</span><span class="arch-step-label">ElevenLabs</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">🤖</span><span class="arch-step-label">Google Meet Bot</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">🧑</span><span class="arch-step-label">Candidate</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step" role="listitem"><span class="arch-step-icon" aria-hidden="true">📊</span><span class="arch-step-label">Evaluation</span></div>
-          <div class="arch-connector" aria-hidden="true">↓</div>
-          <div class="arch-step arch-step-final" role="listitem"><span class="arch-step-icon" aria-hidden="true">🖥️</span><span class="arch-step-label">Admin Dashboard</span></div>
+        <div class="wip-overlay" role="status">
+          <span class="wip-badge"><span class="status-dot pulse" aria-hidden="true"></span>IN PROGRESS</span>
+          <h3 class="wip-title">Everything is under construction</h3>
+          <p class="wip-text">Project write-ups are being prepared and will be added here soon.</p>
         </div>
-
-        <div class="arch-features-grid" role="list" aria-label="Key features">
-          <div class="arch-feature-card" role="listitem">
-            <span class="arch-feature-icon" aria-hidden="true">📄</span>
-            <div class="arch-feature-title">Resume Parsing</div>
-            <div class="arch-feature-desc">Extracts structured candidate data automatically — no manual entry.</div>
-          </div>
-          <div class="arch-feature-card" role="listitem">
-            <span class="arch-feature-icon" aria-hidden="true">🎥</span>
-            <div class="arch-feature-title">Google Meet AI Bot</div>
-            <div class="arch-feature-desc">Joins the call and conducts the interview end-to-end, no human interviewer needed.</div>
-          </div>
-          <div class="arch-feature-card" role="listitem">
-            <span class="arch-feature-icon" aria-hidden="true">📅</span>
-            <div class="arch-feature-title">Scheduling</div>
-            <div class="arch-feature-desc">Handles calendar coordination between candidate and interview slot automatically.</div>
-          </div>
-          <div class="arch-feature-card" role="listitem">
-            <span class="arch-feature-icon" aria-hidden="true">🖥️</span>
-            <div class="arch-feature-title">Admin Dashboard</div>
-            <div class="arch-feature-desc">Recruiters review scores, transcripts, and evaluations in one place.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vishnu AI — build history (merged from former Dev Log section) -->
-      <div class="arch-block" id="vishnu-history" aria-labelledby="history-heading">
-        <div class="arch-header">
-          <h3 class="arch-title" id="history-heading">How Vishnu AI got here</h3>
-          <p class="arch-note">Four rebuilds. Each one threw out most of what came before.</p>
-        </div>
-
-      <div class="phase-track-wrapper" aria-hidden="true">
-        <div class="phase-track-line"></div>
-      </div>
-
-      <div class="phases-grid" role="list">
-
-        <article class="phase-card" role="listitem" aria-label="Phase 1: The Idea">
-          <div class="phase-top">
-            <div class="phase-num-badge">
-              <span class="phase-num-label">PHASE</span>
-              <span class="phase-num-val">01</span>
-            </div>
-            <span class="phase-status-tag ps-done">✓ COMPLETE</span>
-          </div>
-          <div class="phase-node-row" aria-hidden="true">
-            <div class="phase-node pn-done"><span>✦</span></div>
-          </div>
-          <h3 class="phase-title">The Idea</h3>
-          <p class="phase-desc">Just a vision and a blank page. No code, no tools — a 14-year-old with a notepad and the very specific belief that he could build his own AI. Most people would've stopped there.</p>
-          <div class="phase-tools">
-            <span class="pt-label">TOOLS USED</span>
-            <div class="pt-tags">
-              <span class="pt-tag pt-none">🧠 Brain</span>
-              <span class="pt-tag pt-none">📝 Notepad</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="phase-card" role="listitem" aria-label="Phase 2: The Prototype">
-          <div class="phase-top">
-            <div class="phase-num-badge">
-              <span class="phase-num-label">PHASE</span>
-              <span class="phase-num-val">02</span>
-            </div>
-            <span class="phase-status-tag ps-done">✓ COMPLETE</span>
-          </div>
-          <div class="phase-node-row" aria-hidden="true">
-            <div class="phase-node pn-done"><span>✦</span></div>
-          </div>
-          <h3 class="phase-title">The Prototype</h3>
-          <p class="phase-desc">Three AI engines running at once, each with a different job. Messy, unstable, and sometimes hilarious — but it actually worked. That was enough to keep going.</p>
-          <div class="phase-tools">
-            <span class="pt-label">TOOLS USED</span>
-            <div class="pt-tags">
-              <span class="pt-tag pt-chatgpt">ChatGPT <span class="pt-role">MAIN</span></span>
-              <span class="pt-tag pt-grok">Grok <span class="pt-role">JS</span></span>
-              <span class="pt-tag pt-gemini">Gemini <span class="pt-role">UI</span></span>
-            </div>
-          </div>
-        </article>
-
-        <article class="phase-card" role="listitem" aria-label="Phase 3: Vishnu AI v1">
-          <div class="phase-top">
-            <div class="phase-num-badge">
-              <span class="phase-num-label">PHASE</span>
-              <span class="phase-num-val">03</span>
-            </div>
-            <span class="phase-status-tag ps-done">✓ COMPLETE</span>
-          </div>
-          <div class="phase-node-row" aria-hidden="true">
-            <div class="phase-node pn-done"><span>✦</span></div>
-          </div>
-          <h3 class="phase-title">Vishnu AI <span class="phase-version">v.1</span></h3>
-          <p class="phase-desc">Threw out the multi-engine chaos and rebuilt from scratch with one focused model. Less noise, sharper output. For the first time, it actually felt like a real system.</p>
-          <div class="phase-tools">
-            <span class="pt-label">TOOLS USED</span>
-            <div class="pt-tags">
-              <span class="pt-tag pt-grok">Grok <span class="pt-role">ONLY</span></span>
-            </div>
-          </div>
-        </article>
-
-        <article class="phase-card phase-active" role="listitem" aria-label="Phase 4: Vishnu AI V.Force — Active">
-          <div class="phase-glow-ring" aria-hidden="true"></div>
-          <div class="phase-top">
-            <div class="phase-num-badge">
-              <span class="phase-num-label">PHASE</span>
-              <span class="phase-num-val">04</span>
-            </div>
-            <span class="phase-status-tag ps-active">⚡ ACTIVE</span>
-          </div>
-          <div class="phase-node-row" aria-hidden="true">
-            <div class="phase-node pn-active">
-              <span class="node-pulse" aria-hidden="true"></span>
-              <span>▶</span>
-            </div>
-          </div>
-          <h3 class="phase-title">Vishnu AI <span class="phase-version vf-force">V.Force</span></h3>
-          <p class="phase-desc">The version that actually ships. Rebuilt on Claude — smarter responses, cleaner architecture, autonomous interview flow. This is what the first three phases were building toward.</p>
-          <div class="phase-tools">
-            <span class="pt-label">TOOLS USED</span>
-            <div class="pt-tags">
-              <span class="pt-tag pt-claude">Claude <span class="pt-role">ONLY</span></span>
-            </div>
-          </div>
-          <div class="vforce-bar-wrap">
-            <span class="vforce-bar-label">POWER LEVEL</span>
-            <div class="vforce-bar-track" role="progressbar" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100" aria-label="V.Force power level: 94%">
-              <div class="vforce-bar-fill" id="vforceFill" data-target="94">
-                <div class="progress-shimmer" aria-hidden="true"></div>
-              </div>
-            </div>
-            <span class="vforce-bar-val">94%</span>
-          </div>
-        </article>
-
-      </div>
       </div>
     </div>
   </section>
 
-  <!-- ── JOURNEY ────────────────────────────────────────────────── -->
-  <section class="sector" id="sector-03" aria-labelledby="journey-heading">
-    <div class="sector-container">
-      <header class="sector-header">
-        <div class="sector-tag">
-          <span class="sector-num">04 &mdash; JOURNEY</span>
-          <div class="sector-line" aria-hidden="true"></div>
-        </div>
-        <h2 class="sector-title" id="journey-heading">The path so far</h2>
-        <p class="sector-desc">School, projects, and the point where building became the main thing.</p>
-      </header>
-
-      <div class="timeline" role="list" aria-label="Journey timeline">
-        <div class="timeline-track" aria-hidden="true"></div>
-
-        <div class="milestone" role="listitem">
-          <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-done"><span>&#10003;</span></div>
-          </div>
-          <article class="milestone-card">
-            <div class="milestone-header">
-              <span class="milestone-id">CLASS 6 &ndash; 8</span>
-              <span class="milestone-status status-done">COMPLETED</span>
-            </div>
-            <h3 class="milestone-title">Early school years at BBPS</h3>
-            <p class="milestone-detail">Started strong with 95% in Class 6 and earned a Scholar Badge. Class 7 and 8 were a dip and a recovery &mdash; 70%, then 76%. Around this time I started competing in SOF Olympiads and picked up medals across multiple rounds.</p>
-            <div class="milestone-meta">
-              <span class="meta-item">Scholar Badge</span>
-              <span class="meta-item">SOF Olympiads</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="milestone" role="listitem">
-          <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-done"><span>&#10003;</span></div>
-          </div>
-          <article class="milestone-card">
-            <div class="milestone-header">
-              <span class="milestone-id">CLASS 9</span>
-              <span class="milestone-status status-done">COMPLETED</span>
-            </div>
-            <h3 class="milestone-title">Discipline Prefect &amp; the STEAM robot</h3>
-            <p class="milestone-detail">Elected Discipline Prefect &mdash; real responsibility for coordination and student welfare, not just a badge. Finished the year at 81%. Also built the Smart Elderly Assistance Robot for a STEAM competition: a walking prototype with fall detection, emergency calling, and an onboard medical kit.</p>
-            <div class="milestone-meta">
-              <span class="meta-item">Discipline Prefect</span>
-              <span class="meta-item">STEAM Competition</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="milestone" role="listitem">
-          <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-done"><span>&#10003;</span></div>
-          </div>
-          <article class="milestone-card">
-            <div class="milestone-header">
-              <span class="milestone-id">SOFTWARE</span>
-              <span class="milestone-status status-done">COMPLETED</span>
-            </div>
-            <h3 class="milestone-title">Vishnu AI &mdash; idea to working system</h3>
-            <p class="milestone-detail">Started as a rough idea on paper with no code behind it. Went through a messy multi-model prototype, then a full rebuild, before becoming the version that actually holds up. Four rewrites in total, each one throwing out most of what came before.</p>
-            <div class="milestone-meta">
-              <span class="meta-item">Self-taught</span>
-              <span class="meta-item">4 rebuilds</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="milestone" role="listitem">
-          <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-done"><span>&#10003;</span></div>
-          </div>
-          <article class="milestone-card">
-            <div class="milestone-header">
-              <span class="milestone-id">POVC</span>
-              <span class="milestone-status status-done">SHIPPED</span>
-            </div>
-            <h3 class="milestone-title">Built this portfolio from scratch</h3>
-            <p class="milestone-detail">No templates, no frameworks &mdash; plain HTML, CSS, and JavaScript with GSAP for motion. Every layout decision, every piece of copy, and the whole information architecture is mine. AI helped me write code faster; it didn&rsquo;t decide what to build.</p>
-            <div class="milestone-meta">
-              <span class="meta-item">HTML &middot; CSS &middot; JS</span>
-              <span class="meta-item">GSAP</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="milestone" role="listitem">
-          <div class="milestone-connector" aria-hidden="true">
-            <div class="milestone-node node-active">
-              <span class="node-pulse" aria-hidden="true"></span>
-              <span>&#9654;</span>
-            </div>
-          </div>
-          <article class="milestone-card card-active">
-            <div class="milestone-header">
-              <span class="milestone-id">CLASS 10 &mdash; NOW</span>
-              <span class="milestone-status status-active">IN PROGRESS</span>
-            </div>
-            <h3 class="milestone-title">Board year, and building for a real client</h3>
-            <p class="milestone-detail">Currently in Class 10. PT1 came back at 57%, which is below where I want to be &mdash; the rest of the year is about closing that gap. Alongside it I&rsquo;m building Vishnu AI Force, an interview automation platform for MKIPL. Balancing both is the actual challenge right now.</p>
-            <div class="milestone-meta">
-              <span class="meta-item pulse-text">Active</span>
-              <span class="meta-item">Vishnu AI Force</span>
-            </div>
-          </article>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── ACHIEVEMENTS ───────────────────────────────────────────── -->
+  <!-- ── RECOGNITION ────────────────────────────────────────────── -->
   <section class="sector" id="achievements" aria-labelledby="achievements-heading">
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">05 &mdash; RECOGNITION</span>
+          <span class="sector-num">04 &mdash; RECOGNITION</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
         <h2 class="sector-title" id="achievements-heading">Recognition</h2>
-        <p class="sector-desc">Things I've actually earned — no padding, no fluff.</p>
+        <p class="sector-desc">Awards, medals and school roles.</p>
       </header>
 
-      <div class="stats-row" id="statsRow" role="list" aria-label="Statistics">
-        <div class="stat-counter" role="listitem">
-          <div class="sc-val" data-target="4" aria-live="polite">0</div>
-          <div class="sc-key">PROJECTS BUILT</div>
-        </div>
-        <div class="stat-counter" role="listitem">
-          <div class="sc-val" data-target="6" aria-live="polite">0</div>
-          <div class="sc-key">AWARDS WON</div>
-        </div>
-        <div class="stat-counter" role="listitem">
-          <div class="sc-val" data-target="3" aria-live="polite">0</div>
-          <div class="sc-key">AI SYSTEMS</div>
-        </div>
-        <div class="stat-counter" role="listitem">
-          <div class="sc-val" data-target="48" aria-live="polite">0</div>
-          <div class="sc-key">LAPS LOGGED</div>
-        </div>
-        <div class="stat-counter" role="listitem">
-          <div class="sc-val" data-target="1" aria-live="polite">0</div>
-          <div class="sc-key">LEADERSHIP ROLE</div>
-        </div>
-      </div>
-
       <div class="achievements-grid" role="list">
-
-        <article class="achievement-card ach-gold" role="listitem" aria-label="Achievement: Discipline Prefect">
-          <div class="ach-icon" aria-hidden="true">🏆</div>
+        <article class="achievement-card ach-gold" role="listitem" aria-label="Discipline Prefect">
+          <div class="ach-icon" aria-hidden="true">&#127942;</div>
           <div class="ach-content">
             <div class="ach-title">Discipline Prefect</div>
-            <div class="ach-desc">Elected as Discipline Prefect at BBPS. Handled discipline, coordination, and day-to-day student welfare — actual responsibility, not just a title.</div>
-            <div class="ach-tag">LEADERSHIP · BBPS</div>
+            <div class="ach-desc">A school leadership role.</div>
+            <div class="ach-tag">LEADERSHIP</div>
           </div>
         </article>
-
-        <article class="achievement-card ach-gold" role="listitem" aria-label="Achievement: 5 SOF Olympiad Medals">
-          <div class="ach-icon" aria-hidden="true">🥇</div>
+        <article class="achievement-card ach-gold" role="listitem" aria-label="Five SOF Olympiad medals">
+          <div class="ach-icon" aria-hidden="true">&#129351;</div>
           <div class="ach-content">
-            <div class="ach-title">5× SOF Olympiad Medals</div>
-            <div class="ach-desc">Medalled five separate times through the Science Olympiad Foundation. Not a one-off — a pattern across subjects and years.</div>
-            <div class="ach-tag">ACADEMIC · SOF</div>
+            <div class="ach-title">5&times; SOF Olympiad Medals</div>
+            <div class="ach-desc">Medals from the Science Olympiad Foundation.</div>
+            <div class="ach-tag">ACADEMIC &middot; SOF</div>
           </div>
         </article>
-
-        <article class="achievement-card ach-silver" role="listitem" aria-label="Achievement: Scholar Badge">
-          <div class="ach-icon" aria-hidden="true">🎓</div>
+        <article class="achievement-card ach-silver" role="listitem" aria-label="Scholar Badge">
+          <div class="ach-icon" aria-hidden="true">&#127891;</div>
           <div class="ach-content">
             <div class="ach-title">Scholar Badge</div>
-            <div class="ach-desc">Awarded for consistent academic performance — the kind of recognition that comes from showing up, not just one good year.</div>
+            <div class="ach-desc">Academic recognition.</div>
             <div class="ach-tag">ACADEMIC</div>
           </div>
         </article>
-
-        <article class="achievement-card ach-silver" role="listitem" aria-label="Achievement: Perfect 10 Trophy, twice">
-          <div class="ach-icon" aria-hidden="true">🏅</div>
+        <article class="achievement-card ach-silver" role="listitem" aria-label="Perfect 10 Trophy, twice">
+          <div class="ach-icon" aria-hidden="true">&#127941;</div>
           <div class="ach-content">
-            <div class="ach-title">Perfect 10 Trophy × 2</div>
-            <div class="ach-desc">Two separate perfect scores, two separate trophies. Hard to fluke the same result twice.</div>
-            <div class="ach-tag">ACADEMIC · EXCELLENCE</div>
+            <div class="ach-title">Perfect 10 Trophy &times; 2</div>
+            <div class="ach-desc">Awarded twice.</div>
+            <div class="ach-tag">TROPHY</div>
           </div>
         </article>
-
-        <article class="achievement-card ach-cyan" role="listitem" aria-label="Achievement: French International Competition, 90 percent">
-          <div class="ach-icon" aria-hidden="true">🇫🇷</div>
+        <article class="achievement-card ach-cyan" role="listitem" aria-label="French International Competition, 90 percent">
+          <div class="ach-icon" aria-hidden="true">&#127467;&#127479;</div>
           <div class="ach-content">
-            <div class="ach-title">French International Competition — 90%</div>
-            <div class="ach-desc">Scored 90% in an international French language competition. Turns out a third language is harder than shipping a project.</div>
-            <div class="ach-tag">LANGUAGES · INTERNATIONAL</div>
+            <div class="ach-title">French International Competition</div>
+            <div class="ach-desc">Scored 90%.</div>
+            <div class="ach-tag">LANGUAGES</div>
           </div>
         </article>
-
-        <article class="achievement-card ach-cyan" role="listitem" aria-label="Achievement: Bronze Skating Medal">
-          <div class="ach-icon" aria-hidden="true">⛸️</div>
+        <article class="achievement-card ach-cyan" role="listitem" aria-label="Bronze Skating Medal">
+          <div class="ach-icon" aria-hidden="true">&#9971;&#65039;</div>
           <div class="ach-content">
             <div class="ach-title">Bronze Skating Medal</div>
-            <div class="ach-desc">Competitive skating bronze. The same precision and pressure management that helps on the track helps on the ice — different arena, same mindset.</div>
-            <div class="ach-tag">SPORTS · SKATING</div>
+            <div class="ach-desc">Bronze medal in skating.</div>
+            <div class="ach-tag">SPORTS</div>
           </div>
         </article>
-
       </div>
     </div>
   </section>
@@ -848,11 +413,11 @@
     <div class="sector-container">
       <header class="sector-header">
         <div class="sector-tag">
-          <span class="sector-num">06 &mdash; CONTACT</span>
+          <span class="sector-num">05 &mdash; CONTACT</span>
           <div class="sector-line" aria-hidden="true"></div>
         </div>
         <h2 class="sector-title" id="contact-heading">Get in touch</h2>
-        <p class="sector-desc">Ping me. If you've got something worth building, I'm listening.</p>
+        <p class="sector-desc">The fastest way to reach me is email or LinkedIn.</p>
       </header>
 
       <div class="contact-grid" role="list">
@@ -903,32 +468,32 @@
 
       <div class="contact-terminal" role="region" aria-label="Connection terminal">
         <div class="ct-line"><span class="ct-prompt" aria-hidden="true">$</span> <span class="ct-cmd">ping vishnu.creator</span></div>
-        <div class="ct-line ct-response">REPLY FROM VCR-7734 [pbhatia5948@gmail.com]: bytes=32 time=&lt;1ms TTL=128</div>
-        <div class="ct-line ct-response">Connection established. Open to collabs, internships, and interesting problems.</div>
+        <div class="ct-line ct-response">Reply from pbhatia5948@gmail.com &mdash; connection established.</div>
         <div class="ct-line"><span class="ct-prompt" aria-hidden="true">$</span> <span class="ct-cursor" aria-hidden="true">▋</span></div>
       </div>
 
     </div>
   </section>
 
+  </main>
+
   <!-- ── FOOTER ─────────────────────────────────────────────────── -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo"><span class="nav-logo-bracket">[</span>POVC<span class="nav-logo-bracket">]</span></div>
-        <p class="footer-tagline">Portfolio Of Vishnu Creator.<br/>Built by Pranav Bhatia — running on ambition and Claude.</p>
+        <p class="footer-tagline">Portfolio Of Vishnu Creator.<br/>Built by Pranav Bhatia, with AI assistance.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
           <div class="footer-col-title">NAVIGATE</div>
           <a href="#home" class="footer-link">Home</a>
+          <a href="#about" class="footer-link">About</a>
           <a href="#skills" class="footer-link">What I Build</a>
-          <a href="#sector-01" class="footer-link">Projects</a>
+          <a href="#projects" class="footer-link">Projects</a>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">MORE</div>
-          <a href="#about" class="footer-link">About</a>
-          <a href="#sector-03" class="footer-link">Journey</a>
           <a href="#achievements" class="footer-link">Recognition</a>
           <a href="#contact" class="footer-link">Contact</a>
         </div>
@@ -939,22 +504,10 @@
           <a href="mailto:pbhatia5948@gmail.com" class="footer-link">Email</a>
         </div>
       </div>
-      <div class="footer-status">
-        <div class="footer-sys-status">
-          <span class="status-dot pulse" aria-hidden="true"></span>
-          <span>ALL SYSTEMS NOMINAL</span>
-        </div>
-        <div class="footer-build-info">
-          <span>BUILD: v3.0.0-FINAL</span>
-          <span>ENGINE: POVC_OS</span>
-          <span>NODE: VCR-7734</span>
-        </div>
-      </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Pranav Bhatia — POVC. All rights reserved.</span>
-      <span class="footer-heart">Made with ❤️ &amp; Claude</span>
-      <span class="footer-code" aria-hidden="true">0x564953484E55</span>
+      <span>&copy; 2026 Pranav Bhatia &mdash; POVC</span>
+      <span class="footer-heart">Built with AI assistance</span>
     </div>
   </footer>
 

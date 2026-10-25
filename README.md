@@ -1,83 +1,41 @@
 # POVC — Portfolio Of Vishnu Creator
 
-**v3.0.0-FINAL** | Built by **Pranav Bhatia** (alias: VISHNU)
-
-A production-grade personal portfolio with a cyber-telemetry cockpit aesthetic.  
-Zero frameworks. Pure HTML5, CSS3, and JavaScript ES6+.
-
----
-
-## Live Demo
-
-> https://povc.vercel.app
-
----
-
-## Stack
-
-| Layer | Tech |
-|-------|------|
-| Markup | HTML5 (semantic) |
-| Styles | CSS3 + CSS Variables |
-| Scripts | ES6+ Vanilla JS |
-| Animations | GSAP 3.12.5 + ScrollTrigger |
-| Fonts | JetBrains Mono (Google Fonts) |
-| Deploy | Vercel |
-
----
+Personal portfolio of **Pranav Bhatia** (Class 10 student, India).
+Hand-written HTML, CSS and JavaScript, with GSAP for motion. No frameworks.
 
 ## Sections
+| Section | Status |
+|---|---|
+| Home | Live |
+| About | Live |
+| What I Build | Live |
+| Projects | Under construction (write-ups coming) |
+| Recognition | Live |
+| Contact | Live |
 
-| Sector | Content |
-|--------|---------|
-| SECTOR_00 | About — Identity card, bio, quick facts |
-| SECTOR_01 | Skills — Animated bars, tech pills |
-| SECTOR_02 | Projects — Vishnu AI V.Force, POVC, Smart Elderly Robot |
-| SECTOR_03 | Vishnu AI Dev Log — 4 build phases |
-| SECTOR_04 | Racing Telemetry — Nürburgring lap data |
-| SECTOR_05 | Sprint Milestones — Project progress tracker |
-| SECTOR_06 | Life Journey — RPG level log (Class 6 → MIT → Career) |
-| SECTOR_07 | Achievements — Awards, medals, stats |
-| SECTOR_08 | Contact — LinkedIn, GitHub, Email |
+## Features
+- Light theme by default, dark theme toggle (choice saved in `localStorage`)
+- Responsive layout, keyboard navigation, skip link, `prefers-reduced-motion` support
+- Open Graph / Twitter card metadata, web manifest
 
----
-
-## Folder Structure
-
+## Structure
 ```
 POVC/
-├── index.html      — Full semantic HTML (1198 lines)
-├── style.css       — Complete CSS with variables (789 lines)
-├── app.js          — GSAP animations + interactions (746 lines)
-├── manifest.json   — PWA manifest
-├── README.md       — This file
-└── CHANGELOG.md    — Version history
+├── index.html
+├── style.css
+├── app.js
+├── manifest.json
+└── assets/
+    └── profile.jpg
 ```
 
----
+## Run locally
+Open `index.html` in a browser, or serve the folder (for example `python -m http.server 8000`).
 
-## Deploy (Vercel — 3 steps)
-
-```bash
-# 1. Push to GitHub
-git init
-git add .
-git commit -m "POVC v3.0.0-FINAL"
-git remote add origin https://github.com/pranav-1-prtdx/povc.git
-git push -u origin main
-
-# 2. Go to vercel.com → Import repo → Deploy
-# 3. Done. Live in ~60 seconds.
-```
-
----
+## Deploy
+Push to GitHub and import the repository on Vercel (static site, no build step).
 
 ## Contact
-
-- **LinkedIn:** [pranavkbhatia](https://www.linkedin.com/in/pranavkbhatia)
-- **GitHub:** [@pranav-1-prtdx](https://github.com/pranav-1-prtdx)
-- **Email:** pbhatia5948@gmail.com
-
----
-
-*Built with Claude AI. Running on ambition.*
+- LinkedIn: https://www.linkedin.com/in/pranavkbhatia
+- GitHub: https://github.com/pranav-1-prtdx
+- Email: pbhatia5948@gmail.com
